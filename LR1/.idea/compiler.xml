@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="additional_main" target="1.8" />
+      <module name="additional_test" target="1.8" />
+      <module name="IST116PotapenkoAS_main" target="1.8" />
+      <module name="IST116PotapenkoAS_test" target="1.8" />
+      <module name="main_project_main" target="1.8" />
+      <module name="main_project_test" target="1.8" />
+      <module name="temp_main" target="1.8" />
+      <module name="temp_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'LR1'
+version '1.0'
+
+mainClassName = 'Hello'
+
+dependencies {
+
+    compile 'com.google.guava:guava:23.0'
+    testCompile 'junit:junit:4.12'
+    compile project(":additional")
+}
+
+repositories {
+    jcenter()
+}
