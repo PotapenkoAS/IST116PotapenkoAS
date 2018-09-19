@@ -1,5 +1,5 @@
 class World {
-    String sayWorld(){
+    String sayWorld() {
         return "world";
     }
 }
