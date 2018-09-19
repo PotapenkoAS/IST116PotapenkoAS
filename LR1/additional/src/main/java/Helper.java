@@ -1,5 +1,5 @@
 class Helper {
-    String value;
+    private String value;
 
     String getValue() {
         return value;
