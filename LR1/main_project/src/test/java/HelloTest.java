@@ -15,7 +15,7 @@ public class HelloTest {
     public void testFileEquals() throws FileNotFoundException {
         File file = new File("src/main/resources/file.txt");
         Scanner sc = new Scanner(file);
-        assertEquals("!!!",sc.next());
+        assertEquals("!!!!",sc.next());
     }
 
     @Test(expected = FileNotFoundException.class)
