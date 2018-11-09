@@ -1,5 +1,5 @@
-CREATE DATABASE `autocompany` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
-
+create database autocompany;
+use autocompany; 
 create table admin
 (
 	idAdmin int not null,
@@ -25,6 +25,19 @@ create table admin
 
 alter table admin
 	add primary key (idAdmin)
+;
+
+create table bus
+(
+	idBus int not null
+		primary key,
+	name varchar(255) null,
+	seatCount int null,
+	color varchar(255) null,
+	regNumber varchar(50) not null,
+	constraint regNumber_UNIQUE
+		unique (regNumber)
+)
 ;
 
 create table customer
@@ -121,6 +134,9 @@ create table car
 		primary key,
 	idCarType int not null,
 	desctiption text null,
+	regNumber varchar(50) not null,
+	constraint regNumber_UNIQUE
+		unique (regNumber),
 	constraint `car-cartype_fk`
 		foreign key (idCarType) references car_type (idcartype)
 )
@@ -128,27 +144,6 @@ create table car
 
 create index `car-cartype_fk_idx`
 	on car (idCarType)
-;
-
-create table car_list
-(
-	idCar_list int not null
-		primary key,
-	idCar int not null,
-	idOrder int not null,
-	constraint `car_list-order_fk`
-		foreign key (idOrder) references `order` (idorder),
-	constraint `list-car`
-		foreign key (idCar) references car (idcar)
-)
-;
-
-create index `list-car_idx`
-	on car_list (idCar)
-;
-
-create index `list-order_fk_idx`
-	on car_list (idOrder)
 ;
 
 create index `cartype-qualification_fk_idx`
@@ -177,28 +172,93 @@ create index `car_type_qual-qual_fk_idx`
 	on car_type_qual (idQualification)
 ;
 
+create table driver
+(
+	idDriver int not null,
+	workerCode varchar(45) not null,
+	login varchar(45) not null,
+	password varchar(45) not null,
+	surname varchar(255) not null,
+	name varchar(255) not null,
+	patronyic varchar(255) null,
+	phoneNumber varchar(20) null,
+	experience int null,
+	salary int null,
+	idQualification int not null,
+	constraint idDriver
+		unique (idDriver),
+	constraint login
+		unique (login),
+	constraint workerCode_UNIQUE
+		unique (workerCode),
+	constraint `driver-qualification_fk`
+		foreign key (idQualification) references qualification (idqualification)
+)
+;
+
+create index `driver-qualification_fk_idx`
+	on driver (idQualification)
+;
+
+alter table driver
+	add primary key (idDriver)
+;
+
 create table route
 (
 	idRoute int not null
 		primary key,
 	name text not null,
-	date date not null
+	timeStart time null
 )
 ;
 
-create table bus
+create table bus_selected
 (
-	idBus int not null
+	idBus_selected int not null
 		primary key,
-	name varchar(255) null,
-	idRoute int null,
-	constraint `bus-route_FK`
-		foreign key (idRoute) references route (idroute)
+	idRoute int not null,
+	idBus int not null,
+	date date null,
+	idFirstDriver int not null,
+	idSecondDriver int null,
+	idConductor int null,
+	constraint `bus_selected-bus_fk`
+		foreign key (idBus) references bus (idbus)
+			on delete cascade,
+	constraint `bus_selected-route_FK`
+		foreign key (idRoute) references route (idroute),
+	constraint `bus_selected_conductor-driver`
+		foreign key (idConductor) references driver (iddriver),
+	constraint `bus_selected_firstDriver-driver_fk`
+		foreign key (idFirstDriver) references driver (iddriver),
+	constraint `bus_selected_secondDriver-driver_fk`
+		foreign key (idSecondDriver) references driver (iddriver)
 )
 ;
 
 create index `bus-route_FK_idx`
-	on bus (idRoute)
+	on bus_selected (idRoute)
+;
+
+create index `bus_selcected_conductor-driver_idx`
+	on bus_selected (idConductor)
+;
+
+create index `bus_selected-bus_fk_idx`
+	on bus_selected (idBus)
+;
+
+create index `bus_selected-firstDriver-driver_idx`
+	on bus_selected (idFirstDriver, idSecondDriver, idConductor)
+;
+
+create index `bus_selected_firstDriver-driver_fk_idx`
+	on bus_selected (idFirstDriver)
+;
+
+create index `bus_selected_secondDriver-driver_fk_idx`
+	on bus_selected (idSecondDriver)
 ;
 
 create table dest_route
@@ -225,73 +285,14 @@ create index `dest_route-route_fk_idx`
 	on dest_route (idRoute)
 ;
 
-create table driver
-(
-	idDriver int not null,
-	workerCode varchar(45) not null,
-	login varchar(45) not null,
-	password varchar(45) not null,
-	surname varchar(255) not null,
-	name varchar(255) not null,
-	patronyic varchar(255) null,
-	phoneNumber varchar(20) null,
-	experience int null,
-	salary int null,
-	standardBus int null,
-	idQualification int not null,
-	constraint idDriver
-		unique (idDriver),
-	constraint login
-		unique (login),
-	constraint workerCode_UNIQUE
-		unique (workerCode),
-	constraint `driver-bus_fk`
-		foreign key (standardBus) references bus (idbus),
-	constraint `driver-qualification_fk`
-		foreign key (idQualification) references qualification (idqualification)
-)
-;
-
-create index `driver-bus_fk_idx`
-	on driver (standardBus)
-;
-
-create index `driver-qualification_fk_idx`
-	on driver (idQualification)
-;
-
-alter table driver
-	add primary key (idDriver)
-;
-
-create table driver_list
-(
-	idDriver_list int not null
-		primary key,
-	idDriver int not null,
-	idOrder int not null,
-	constraint `list-driver_fk`
-		foreign key (idDriver) references driver (iddriver),
-	constraint `list_driver-order_fk`
-		foreign key (idOrder) references `order` (idorder)
-			on delete cascade
-)
-;
-
-create index `list-driver_fk_idx`
-	on driver_list (idDriver)
-;
-
-create index `list-order_fk_idx`
-	on driver_list (idOrder)
-;
-
 create table seat
 (
 	idSeat int not null
 		primary key,
 	idBus int not null,
-	isBusy tinyint(1) default '0' not null,
+	row int null,
+	number int null,
+	`column` int null,
 	constraint `seat-bus_fk`
 		foreign key (idBus) references bus (idbus)
 			on delete cascade
@@ -323,6 +324,50 @@ create table order_list
 	constraint `order_item-service_fk`
 		foreign key (idService) references service (idservice)
 )
+;
+
+create table car_list
+(
+	idCar_list int not null
+		primary key,
+	idCar int not null,
+	idOrder_list int not null,
+	constraint `car_list-order_list_fk`
+		foreign key (idOrder_list) references order_list (idorder_item)
+			on delete cascade,
+	constraint `list-car`
+		foreign key (idCar) references car (idcar)
+)
+;
+
+create index `car_list-order_list_fk_idx`
+	on car_list (idOrder_list)
+;
+
+create index `list-car_idx`
+	on car_list (idCar)
+;
+
+create table driver_list
+(
+	idDriver_list int not null
+		primary key,
+	idDriver int not null,
+	idOrder_list int not null,
+	constraint `list-driver_fk`
+		foreign key (idDriver) references driver (iddriver),
+	constraint `list_driver-order_list_fk`
+		foreign key (idOrder_list) references order_list (idorder_item)
+			on delete cascade
+)
+;
+
+create index `list-driver_fk_idx`
+	on driver_list (idDriver)
+;
+
+create index `list_driver-order_list_fk_idx`
+	on driver_list (idOrder_list)
 ;
 
 create index `order_item-order_fk_idx`
@@ -363,16 +408,22 @@ create table ticket
 	idSeat int not null,
 	idCustomer int not null,
 	idRoute int not null,
-	date datetime null,
-	cost int null,
+	date datetime not null,
+	cost int not null,
+	startDest int not null,
+	finalDest int not null,
 	constraint `ticket-bus_fk`
-		foreign key (idBus) references bus (idbus),
+		foreign key (idBus) references bus_selected (idBus_selected),
 	constraint `ticket-customer_fk`
 		foreign key (idCustomer) references customer (idcustomer),
 	constraint `ticket-route_fk`
 		foreign key (idRoute) references route (idroute),
 	constraint `ticket-seat_fk`
-		foreign key (idSeat) references seat (idseat)
+		foreign key (idSeat) references seat (idseat),
+	constraint `ticket_final-destination`
+		foreign key (finalDest) references destination (iddestination),
+	constraint `ticket_start-destination`
+		foreign key (startDest) references destination (iddestination)
 )
 ;
 
@@ -392,4 +443,11 @@ create index `ticket-seat_fk_idx`
 	on ticket (idSeat)
 ;
 
+create index `ticket_final-destination_idx`
+	on ticket (finalDest)
+;
+
+create index `ticket_start-destination_idx`
+	on ticket (startDest)
+;
 
