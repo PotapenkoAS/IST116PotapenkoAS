@@ -83,9 +83,9 @@
           <Property Name="login" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Surname" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Patronymic" Type="varchar" MaxLength="255" />
-          <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
+          <Property Name="surname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="patronymic" Type="varchar" MaxLength="255" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="dest_route">
           <Key>
@@ -802,12 +802,12 @@
           <Property Name="idCustomer" Type="Int32" Nullable="false" />
           <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="order" Relationship="Self.order_customer_fk" FromRole="customer" ToRole="order" />
           <NavigationProperty Name="ticket" Relationship="Self.ticket_customer_fk" FromRole="customer" ToRole="ticket" />
+          <Property Name="patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="dest_route">
           <Key>
@@ -1547,14 +1547,14 @@
           <EntitySetMapping Name="customer">
             <EntityTypeMapping TypeName="AutoCompanyDBModel.customer">
               <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dest_route">

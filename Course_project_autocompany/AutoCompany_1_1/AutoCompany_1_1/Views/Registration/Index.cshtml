@@ -12,6 +12,8 @@
 <div class="form-horizontal">
 	<h4>car</h4>
 	<hr />
+	<label>worker</label>
+	<input type="checkbox"><br />
 	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 	<div class="form-group">
 		@Html.LabelFor(model => model.login, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -43,10 +45,17 @@
 		</div>
 	</div>
 	<div class="form-group">
-		@Html.LabelFor(model => model.patronyic, htmlAttributes: new { @class = "control-label col-md-2" })
+		@Html.LabelFor(model => model.patronymic, htmlAttributes: new { @class = "control-label col-md-2" })
 		<div class="col-md-10">
-			@Html.EditorFor(model => model.patronyic, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.patronyic, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.patronymic, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.patronymic, "", new { @class = "text-danger" })
+		</div>
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
 		</div>
 	</div>
 	<div class="form-group">

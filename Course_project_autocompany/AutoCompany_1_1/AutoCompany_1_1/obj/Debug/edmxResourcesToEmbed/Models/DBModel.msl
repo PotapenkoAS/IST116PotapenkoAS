@@ -81,13 +81,13 @@
     <EntitySetMapping Name="customer">
       <EntityTypeMapping TypeName="AutoCompanyDBModel.customer">
         <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
           <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
           <ScalarProperty Name="login" ColumnName="login" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="Surname" ColumnName="Surname" />
-          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

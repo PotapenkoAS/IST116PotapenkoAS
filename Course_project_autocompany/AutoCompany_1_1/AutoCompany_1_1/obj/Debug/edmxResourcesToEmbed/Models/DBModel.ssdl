@@ -78,9 +78,9 @@
     <Property Name="login" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
-    <Property Name="Surname" Type="varchar" MaxLength="255" Nullable="false" />
-    <Property Name="Patronymic" Type="varchar" MaxLength="255" />
-    <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
+    <Property Name="surname" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="patronymic" Type="varchar" MaxLength="255" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="dest_route">
     <Key>

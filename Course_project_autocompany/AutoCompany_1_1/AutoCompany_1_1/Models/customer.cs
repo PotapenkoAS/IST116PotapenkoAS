@@ -11,8 +11,9 @@ namespace AutoCompany_1_1.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class customer
+    using System.Data.SqlClient;
+
+    public partial class customer:User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public customer()
@@ -20,18 +21,45 @@ namespace AutoCompany_1_1.Models
             this.order = new HashSet<order>();
             this.ticket = new HashSet<ticket>();
         }
-    
+
         public int idCustomer { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public string Surname { get; set; }
-        public string name { get; set; }
-        public string Patronymic { get; set; }
-        public string PhoneNumber { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> order { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ticket> ticket { get; set; }
+
+        public static customer Convert(User v)
+        {
+            customer cus = new customer();
+            cus.login = v.login;
+            cus.password = v.password;
+            cus.surname = v.surname;
+            cus.name = v.name;
+            if (v.patronymic != null)
+            {
+                cus.patronymic = v.patronymic;
+            }
+            cus.phoneNumber = v.phoneNumber;
+            using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
+            {
+               
+                SqlCommand query = new SqlCommand("select max(idCustomer) from customer");
+                SqlConnection conn = new SqlConnection("Data Source=(localDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\AutoCompanyDB" +
+            ".mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=Ent" +
+            "ityFramework");
+                conn.Open();
+                query.Connection = conn;
+                var tmp = query.ExecuteScalar();
+                int id = 0;
+                if(!tmp.Equals(DBNull.Value))
+                {
+                    id = System.Convert.ToInt32(query.ExecuteScalar());
+                }
+                conn.Close();
+                cus.idCustomer = id + 1;
+            }
+            return cus;
+        }
     }
 }
