@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище AutoCompanyDBModelContainer" CdmEntityContainer="AutoCompanyDBEntities">
+    <EntitySetMapping Name="admin">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+          <ScalarProperty Name="idAdmin" ColumnName="idAdmin" />
+          <ScalarProperty Name="workerCode" ColumnName="workerCode" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="experience" ColumnName="experience" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bus">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.bus">
+        <MappingFragment StoreEntitySet="bus">
+          <ScalarProperty Name="idBus" ColumnName="idBus" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="seatCount" ColumnName="seatCount" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="regNumber" ColumnName="regNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bus_selected">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.bus_selected">
+        <MappingFragment StoreEntitySet="bus_selected">
+          <ScalarProperty Name="idBus_selected" ColumnName="idBus_selected" />
+          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
+          <ScalarProperty Name="idBus" ColumnName="idBus" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="idFirstDriver" ColumnName="idFirstDriver" />
+          <ScalarProperty Name="idSecondDriver" ColumnName="idSecondDriver" />
+          <ScalarProperty Name="idConductor" ColumnName="idConductor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="car">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.car">
+        <MappingFragment StoreEntitySet="car">
+          <ScalarProperty Name="idCar" ColumnName="idCar" />
+          <ScalarProperty Name="idCarType" ColumnName="idCarType" />
+          <ScalarProperty Name="desctiption" ColumnName="desctiption" />
+          <ScalarProperty Name="regNumber" ColumnName="regNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="car_list">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.car_list">
+        <MappingFragment StoreEntitySet="car_list">
+          <ScalarProperty Name="idCar_list" ColumnName="idCar_list" />
+          <ScalarProperty Name="idCar" ColumnName="idCar" />
+          <ScalarProperty Name="idOrder_list" ColumnName="idOrder_list" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="car_type">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.car_type">
+        <MappingFragment StoreEntitySet="car_type">
+          <ScalarProperty Name="idCarType" ColumnName="idCarType" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="idQualification" ColumnName="idQualification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="car_type_qual">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.car_type_qual">
+        <MappingFragment StoreEntitySet="car_type_qual">
+          <ScalarProperty Name="idCar_type_qual" ColumnName="idCar_type_qual" />
+          <ScalarProperty Name="idCarType" ColumnName="idCarType" />
+          <ScalarProperty Name="idQualification" ColumnName="idQualification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customer">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.customer">
+        <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dest_route">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.dest_route">
+        <MappingFragment StoreEntitySet="dest_route">
+          <ScalarProperty Name="idDest_route" ColumnName="idDest_route" />
+          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
+          <ScalarProperty Name="idDestination" ColumnName="idDestination" />
+          <ScalarProperty Name="timeArrive" ColumnName="timeArrive" />
+          <ScalarProperty Name="timeOut" ColumnName="timeOut" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="destination">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.destination">
+        <MappingFragment StoreEntitySet="destination">
+          <ScalarProperty Name="idDestination" ColumnName="idDestination" />
+          <ScalarProperty Name="town" ColumnName="town" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dispatcher">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.dispatcher">
+        <MappingFragment StoreEntitySet="dispatcher">
+          <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+          <ScalarProperty Name="idDispatcher" ColumnName="idDispatcher" />
+          <ScalarProperty Name="workerCode" ColumnName="workerCode" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="experience" ColumnName="experience" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="driver">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.driver">
+        <MappingFragment StoreEntitySet="driver">
+          <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+          <ScalarProperty Name="idDriver" ColumnName="idDriver" />
+          <ScalarProperty Name="workerCode" ColumnName="workerCode" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="experience" ColumnName="experience" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="idQualification" ColumnName="idQualification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="driver_list">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.driver_list">
+        <MappingFragment StoreEntitySet="driver_list">
+          <ScalarProperty Name="idDriver_list" ColumnName="idDriver_list" />
+          <ScalarProperty Name="idDriver" ColumnName="idDriver" />
+          <ScalarProperty Name="idOrder_list" ColumnName="idOrder_list" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.order">
+        <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="cost" ColumnName="cost" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order_list">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.order_list">
+        <MappingFragment StoreEntitySet="order_list">
+          <ScalarProperty Name="idOrder_item" ColumnName="idOrder_item" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="idService" ColumnName="idService" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="qualification">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.qualification">
+        <MappingFragment StoreEntitySet="qualification">
+          <ScalarProperty Name="idQualification" ColumnName="idQualification" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="rang" ColumnName="rang" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="route">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.route">
+        <MappingFragment StoreEntitySet="route">
+          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="timeStart" ColumnName="timeStart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seat">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.seat">
+        <MappingFragment StoreEntitySet="seat">
+          <ScalarProperty Name="idSeat" ColumnName="idSeat" />
+          <ScalarProperty Name="idBus" ColumnName="idBus" />
+          <ScalarProperty Name="row" ColumnName="row" />
+          <ScalarProperty Name="number" ColumnName="number" />
+          <ScalarProperty Name="column" ColumnName="column" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="service">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.service">
+        <MappingFragment StoreEntitySet="service">
+          <ScalarProperty Name="idService" ColumnName="idService" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="cost" ColumnName="cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="service_car_type">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.service_car_type">
+        <MappingFragment StoreEntitySet="service_car_type">
+          <ScalarProperty Name="idService_car_type" ColumnName="idService_car_type" />
+          <ScalarProperty Name="idService" ColumnName="idService" />
+          <ScalarProperty Name="idCarType" ColumnName="idCarType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ticket">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.ticket">
+        <MappingFragment StoreEntitySet="ticket">
+          <ScalarProperty Name="idTticket" ColumnName="idTticket" />
+          <ScalarProperty Name="idBus" ColumnName="idBus" />
+          <ScalarProperty Name="idSeat" ColumnName="idSeat" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="cost" ColumnName="cost" />
+          <ScalarProperty Name="startDest" ColumnName="startDest" />
+          <ScalarProperty Name="finalDest" ColumnName="finalDest" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,757 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AutoCompanyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="idAdmin" />
+    </Key>
+    <Property Name="idAdmin" Type="Int32" Nullable="false" />
+    <Property Name="workerCode" Type="Int32" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="experience" Type="Int32" />
+    <Property Name="salary" Type="Int32" />
+  </EntityType>
+  <EntityType Name="bus">
+    <Key>
+      <PropertyRef Name="idBus" />
+    </Key>
+    <Property Name="idBus" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="seatCount" Type="Int32" />
+    <Property Name="color" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="regNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="bus_selected" Relationship="Self.bus_selected_bus_fk" FromRole="bus" ToRole="bus_selected" />
+    <NavigationProperty Name="seat" Relationship="Self.seat_bus_fk" FromRole="bus" ToRole="seat" />
+  </EntityType>
+  <EntityType Name="bus_selected">
+    <Key>
+      <PropertyRef Name="idBus_selected" />
+    </Key>
+    <Property Name="idBus_selected" Type="Int32" Nullable="false" />
+    <Property Name="idRoute" Type="Int32" Nullable="false" />
+    <Property Name="idBus" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="idFirstDriver" Type="Int32" Nullable="false" />
+    <Property Name="idSecondDriver" Type="Int32" />
+    <Property Name="idConductor" Type="Int32" />
+    <NavigationProperty Name="bus" Relationship="Self.bus_selected_bus_fk" FromRole="bus_selected" ToRole="bus" />
+    <NavigationProperty Name="driver" Relationship="Self.bus_selected_conductor_driver" FromRole="bus_selected" ToRole="driver" />
+    <NavigationProperty Name="driver1" Relationship="Self.bus_selected_firstDriver_driver_fk" FromRole="bus_selected" ToRole="driver" />
+    <NavigationProperty Name="driver2" Relationship="Self.bus_selected_secondDriver_driver_fk" FromRole="bus_selected" ToRole="driver" />
+    <NavigationProperty Name="route" Relationship="Self.bus_selected_route_FK" FromRole="bus_selected" ToRole="route" />
+    <NavigationProperty Name="ticket" Relationship="Self.ticket_bus_fk" FromRole="bus_selected" ToRole="ticket" />
+  </EntityType>
+  <EntityType Name="car">
+    <Key>
+      <PropertyRef Name="idCar" />
+    </Key>
+    <Property Name="idCar" Type="Int32" Nullable="false" />
+    <Property Name="idCarType" Type="Int32" Nullable="false" />
+    <Property Name="desctiption" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="regNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="car_type" Relationship="Self.car_cartype_fk" FromRole="car" ToRole="car_type" />
+    <NavigationProperty Name="car_list" Relationship="Self.list_car" FromRole="car" ToRole="car_list" />
+  </EntityType>
+  <EntityType Name="car_list">
+    <Key>
+      <PropertyRef Name="idCar_list" />
+    </Key>
+    <Property Name="idCar_list" Type="Int32" Nullable="false" />
+    <Property Name="idCar" Type="Int32" Nullable="false" />
+    <Property Name="idOrder_list" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="car" Relationship="Self.list_car" FromRole="car_list" ToRole="car" />
+    <NavigationProperty Name="order_list" Relationship="Self.car_list_order_list_fk" FromRole="car_list" ToRole="order_list" />
+  </EntityType>
+  <EntityType Name="car_type">
+    <Key>
+      <PropertyRef Name="idCarType" />
+    </Key>
+    <Property Name="idCarType" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idQualification" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="car" Relationship="Self.car_cartype_fk" FromRole="car_type" ToRole="car" />
+    <NavigationProperty Name="car_type_qual" Relationship="Self.car_type_qual_car_type_fk" FromRole="car_type" ToRole="car_type_qual" />
+    <NavigationProperty Name="qualification" Relationship="Self.cartype_qualification_fk" FromRole="car_type" ToRole="qualification" />
+    <NavigationProperty Name="service_car_type" Relationship="Self.service_car_type_car_type_fk" FromRole="car_type" ToRole="service_car_type" />
+  </EntityType>
+  <EntityType Name="car_type_qual">
+    <Key>
+      <PropertyRef Name="idCar_type_qual" />
+    </Key>
+    <Property Name="idCar_type_qual" Type="Int32" Nullable="false" />
+    <Property Name="idCarType" Type="Int32" Nullable="false" />
+    <Property Name="idQualification" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="car_type" Relationship="Self.car_type_qual_car_type_fk" FromRole="car_type_qual" ToRole="car_type" />
+    <NavigationProperty Name="qualification" Relationship="Self.car_type_qual_qual_fk" FromRole="car_type_qual" ToRole="qualification" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="idCustomer" />
+    </Key>
+    <Property Name="idCustomer" Type="Int32" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="order" Relationship="Self.order_customer_fk" FromRole="customer" ToRole="order" />
+    <NavigationProperty Name="ticket" Relationship="Self.ticket_customer_fk" FromRole="customer" ToRole="ticket" />
+  </EntityType>
+  <EntityType Name="dest_route">
+    <Key>
+      <PropertyRef Name="idDest_route" />
+    </Key>
+    <Property Name="idDest_route" Type="Int32" Nullable="false" />
+    <Property Name="idRoute" Type="Int32" Nullable="false" />
+    <Property Name="idDestination" Type="Int32" Nullable="false" />
+    <Property Name="timeArrive" Type="Time" Precision="7" />
+    <Property Name="timeOut" Type="Time" Precision="7" />
+    <NavigationProperty Name="destination" Relationship="Self.dest_route_destination_fk" FromRole="dest_route" ToRole="destination" />
+    <NavigationProperty Name="route" Relationship="Self.dest_route_route_fk" FromRole="dest_route" ToRole="route" />
+  </EntityType>
+  <EntityType Name="destination">
+    <Key>
+      <PropertyRef Name="idDestination" />
+    </Key>
+    <Property Name="idDestination" Type="Int32" Nullable="false" />
+    <Property Name="town" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="dest_route" Relationship="Self.dest_route_destination_fk" FromRole="destination" ToRole="dest_route" />
+    <NavigationProperty Name="ticket" Relationship="Self.ticket_final_destination" FromRole="destination" ToRole="ticket" />
+    <NavigationProperty Name="ticket1" Relationship="Self.ticket_start_destination" FromRole="destination" ToRole="ticket" />
+  </EntityType>
+  <EntityType Name="dispatcher">
+    <Key>
+      <PropertyRef Name="idDispatcher" />
+    </Key>
+    <Property Name="idDispatcher" Type="Int32" Nullable="false" />
+    <Property Name="workerCode" Type="Int32" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="experience" Type="Int32" />
+    <Property Name="salary" Type="Int32" />
+  </EntityType>
+  <EntityType Name="driver">
+    <Key>
+      <PropertyRef Name="idDriver" />
+    </Key>
+    <Property Name="idDriver" Type="Int32" Nullable="false" />
+    <Property Name="workerCode" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="experience" Type="Int32" />
+    <Property Name="salary" Type="Int32" />
+    <Property Name="idQualification" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="bus_selected" Relationship="Self.bus_selected_conductor_driver" FromRole="driver" ToRole="bus_selected" />
+    <NavigationProperty Name="bus_selected1" Relationship="Self.bus_selected_firstDriver_driver_fk" FromRole="driver" ToRole="bus_selected" />
+    <NavigationProperty Name="bus_selected2" Relationship="Self.bus_selected_secondDriver_driver_fk" FromRole="driver" ToRole="bus_selected" />
+    <NavigationProperty Name="qualification" Relationship="Self.driver_qualification_fk" FromRole="driver" ToRole="qualification" />
+    <NavigationProperty Name="driver_list" Relationship="Self.list_driver_fk" FromRole="driver" ToRole="driver_list" />
+  </EntityType>
+  <EntityType Name="driver_list">
+    <Key>
+      <PropertyRef Name="idDriver_list" />
+    </Key>
+    <Property Name="idDriver_list" Type="Int32" Nullable="false" />
+    <Property Name="idDriver" Type="Int32" Nullable="false" />
+    <Property Name="idOrder_list" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="driver" Relationship="Self.list_driver_fk" FromRole="driver_list" ToRole="driver" />
+    <NavigationProperty Name="order_list" Relationship="Self.list_driver_order_list_fk" FromRole="driver_list" ToRole="order_list" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Precision="3" />
+    <Property Name="cost" Type="Int32" />
+    <Property Name="adress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="idCustomer" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="customer" Relationship="Self.order_customer_fk" FromRole="order" ToRole="customer" />
+    <NavigationProperty Name="order_list" Relationship="Self.order_item_order_fk" FromRole="order" ToRole="order_list" />
+  </EntityType>
+  <EntityType Name="order_list">
+    <Key>
+      <PropertyRef Name="idOrder_item" />
+    </Key>
+    <Property Name="idOrder_item" Type="Int32" Nullable="false" />
+    <Property Name="idOrder" Type="Int32" Nullable="false" />
+    <Property Name="idService" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="car_list" Relationship="Self.car_list_order_list_fk" FromRole="order_list" ToRole="car_list" />
+    <NavigationProperty Name="driver_list" Relationship="Self.list_driver_order_list_fk" FromRole="order_list" ToRole="driver_list" />
+    <NavigationProperty Name="order" Relationship="Self.order_item_order_fk" FromRole="order_list" ToRole="order" />
+    <NavigationProperty Name="service" Relationship="Self.order_item_service_fk" FromRole="order_list" ToRole="service" />
+  </EntityType>
+  <EntityType Name="qualification">
+    <Key>
+      <PropertyRef Name="idQualification" />
+    </Key>
+    <Property Name="idQualification" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rang" Type="Int32" />
+    <NavigationProperty Name="car_type" Relationship="Self.cartype_qualification_fk" FromRole="qualification" ToRole="car_type" />
+    <NavigationProperty Name="car_type_qual" Relationship="Self.car_type_qual_qual_fk" FromRole="qualification" ToRole="car_type_qual" />
+    <NavigationProperty Name="driver" Relationship="Self.driver_qualification_fk" FromRole="qualification" ToRole="driver" />
+  </EntityType>
+  <EntityType Name="route">
+    <Key>
+      <PropertyRef Name="idRoute" />
+    </Key>
+    <Property Name="idRoute" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="timeStart" Type="Time" Precision="7" />
+    <NavigationProperty Name="bus_selected" Relationship="Self.bus_selected_route_FK" FromRole="route" ToRole="bus_selected" />
+    <NavigationProperty Name="dest_route" Relationship="Self.dest_route_route_fk" FromRole="route" ToRole="dest_route" />
+    <NavigationProperty Name="ticket" Relationship="Self.ticket_route_fk" FromRole="route" ToRole="ticket" />
+  </EntityType>
+  <EntityType Name="seat">
+    <Key>
+      <PropertyRef Name="idSeat" />
+    </Key>
+    <Property Name="idSeat" Type="Int32" Nullable="false" />
+    <Property Name="idBus" Type="Int32" Nullable="false" />
+    <Property Name="row" Type="Int32" />
+    <Property Name="number" Type="Int32" />
+    <Property Name="column" Type="Int32" />
+    <NavigationProperty Name="bus" Relationship="Self.seat_bus_fk" FromRole="seat" ToRole="bus" />
+    <NavigationProperty Name="ticket" Relationship="Self.ticket_seat_fk" FromRole="seat" ToRole="ticket" />
+  </EntityType>
+  <EntityType Name="service">
+    <Key>
+      <PropertyRef Name="idService" />
+    </Key>
+    <Property Name="idService" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="cost" Type="Int32" />
+    <NavigationProperty Name="order_list" Relationship="Self.order_item_service_fk" FromRole="service" ToRole="order_list" />
+    <NavigationProperty Name="service_car_type" Relationship="Self.service_car_service_fk" FromRole="service" ToRole="service_car_type" />
+  </EntityType>
+  <EntityType Name="service_car_type">
+    <Key>
+      <PropertyRef Name="idService_car_type" />
+    </Key>
+    <Property Name="idService_car_type" Type="Int32" Nullable="false" />
+    <Property Name="idService" Type="Int32" Nullable="false" />
+    <Property Name="idCarType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="car_type" Relationship="Self.service_car_type_car_type_fk" FromRole="service_car_type" ToRole="car_type" />
+    <NavigationProperty Name="service" Relationship="Self.service_car_service_fk" FromRole="service_car_type" ToRole="service" />
+  </EntityType>
+  <EntityType Name="ticket">
+    <Key>
+      <PropertyRef Name="idTticket" />
+    </Key>
+    <Property Name="idTticket" Type="Int32" Nullable="false" />
+    <Property Name="idBus" Type="Int32" Nullable="false" />
+    <Property Name="idSeat" Type="Int32" Nullable="false" />
+    <Property Name="idCustomer" Type="Int32" Nullable="false" />
+    <Property Name="idRoute" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cost" Type="Int32" Nullable="false" />
+    <Property Name="startDest" Type="Int32" Nullable="false" />
+    <Property Name="finalDest" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="bus_selected" Relationship="Self.ticket_bus_fk" FromRole="ticket" ToRole="bus_selected" />
+    <NavigationProperty Name="customer" Relationship="Self.ticket_customer_fk" FromRole="ticket" ToRole="customer" />
+    <NavigationProperty Name="destination" Relationship="Self.ticket_final_destination" FromRole="ticket" ToRole="destination" />
+    <NavigationProperty Name="destination1" Relationship="Self.ticket_start_destination" FromRole="ticket" ToRole="destination" />
+    <NavigationProperty Name="route" Relationship="Self.ticket_route_fk" FromRole="ticket" ToRole="route" />
+    <NavigationProperty Name="seat" Relationship="Self.ticket_seat_fk" FromRole="ticket" ToRole="seat" />
+  </EntityType>
+  <Association Name="bus_selected_bus_fk">
+    <End Role="bus" Type="Self.bus" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bus">
+        <PropertyRef Name="idBus" />
+      </Principal>
+      <Dependent Role="bus_selected">
+        <PropertyRef Name="idBus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="seat_bus_fk">
+    <End Role="bus" Type="Self.bus" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seat" Type="Self.seat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bus">
+        <PropertyRef Name="idBus" />
+      </Principal>
+      <Dependent Role="seat">
+        <PropertyRef Name="idBus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bus_selected_conductor_driver">
+    <End Role="driver" Type="Self.driver" Multiplicity="0..1" />
+    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="driver">
+        <PropertyRef Name="idDriver" />
+      </Principal>
+      <Dependent Role="bus_selected">
+        <PropertyRef Name="idConductor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bus_selected_firstDriver_driver_fk">
+    <End Role="driver" Type="Self.driver" Multiplicity="1" />
+    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="driver">
+        <PropertyRef Name="idDriver" />
+      </Principal>
+      <Dependent Role="bus_selected">
+        <PropertyRef Name="idFirstDriver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bus_selected_secondDriver_driver_fk">
+    <End Role="driver" Type="Self.driver" Multiplicity="0..1" />
+    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="driver">
+        <PropertyRef Name="idDriver" />
+      </Principal>
+      <Dependent Role="bus_selected">
+        <PropertyRef Name="idSecondDriver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bus_selected_route_FK">
+    <End Role="route" Type="Self.route" Multiplicity="1" />
+    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="route">
+        <PropertyRef Name="idRoute" />
+      </Principal>
+      <Dependent Role="bus_selected">
+        <PropertyRef Name="idRoute" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ticket_bus_fk">
+    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="1" />
+    <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bus_selected">
+        <PropertyRef Name="idBus_selected" />
+      </Principal>
+      <Dependent Role="ticket">
+        <PropertyRef Name="idBus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="car_cartype_fk">
+    <End Role="car_type" Type="Self.car_type" Multiplicity="1" />
+    <End Role="car" Type="Self.car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="car_type">
+        <PropertyRef Name="idCarType" />
+      </Principal>
+      <Dependent Role="car">
+        <PropertyRef Name="idCarType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="list_car">
+    <End Role="car" Type="Self.car" Multiplicity="1" />
+    <End Role="car_list" Type="Self.car_list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="car">
+        <PropertyRef Name="idCar" />
+      </Principal>
+      <Dependent Role="car_list">
+        <PropertyRef Name="idCar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="car_list_order_list_fk">
+    <End Role="order_list" Type="Self.order_list" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="car_list" Type="Self.car_list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order_list">
+        <PropertyRef Name="idOrder_item" />
+      </Principal>
+      <Dependent Role="car_list">
+        <PropertyRef Name="idOrder_list" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="car_type_qual_car_type_fk">
+    <End Role="car_type" Type="Self.car_type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="car_type_qual" Type="Self.car_type_qual" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="car_type">
+        <PropertyRef Name="idCarType" />
+      </Principal>
+      <Dependent Role="car_type_qual">
+        <PropertyRef Name="idCarType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="cartype_qualification_fk">
+    <End Role="qualification" Type="Self.qualification" Multiplicity="1" />
+    <End Role="car_type" Type="Self.car_type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="qualification">
+        <PropertyRef Name="idQualification" />
+      </Principal>
+      <Dependent Role="car_type">
+        <PropertyRef Name="idQualification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="service_car_type_car_type_fk">
+    <End Role="car_type" Type="Self.car_type" Multiplicity="1" />
+    <End Role="service_car_type" Type="Self.service_car_type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="car_type">
+        <PropertyRef Name="idCarType" />
+      </Principal>
+      <Dependent Role="service_car_type">
+        <PropertyRef Name="idCarType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="car_type_qual_qual_fk">
+    <End Role="qualification" Type="Self.qualification" Multiplicity="1" />
+    <End Role="car_type_qual" Type="Self.car_type_qual" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="qualification">
+        <PropertyRef Name="idQualification" />
+      </Principal>
+      <Dependent Role="car_type_qual">
+        <PropertyRef Name="idQualification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="order_customer_fk">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="order" Type="Self.order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ticket_customer_fk">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="idCustomer" />
+      </Principal>
+      <Dependent Role="ticket">
+        <PropertyRef Name="idCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="dest_route_destination_fk">
+    <End Role="destination" Type="Self.destination" Multiplicity="1" />
+    <End Role="dest_route" Type="Self.dest_route" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="destination">
+        <PropertyRef Name="idDestination" />
+      </Principal>
+      <Dependent Role="dest_route">
+        <PropertyRef Name="idDestination" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="dest_route_route_fk">
+    <End Role="route" Type="Self.route" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="dest_route" Type="Self.dest_route" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="route">
+        <PropertyRef Name="idRoute" />
+      </Principal>
+      <Dependent Role="dest_route">
+        <PropertyRef Name="idRoute" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ticket_final_destination">
+    <End Role="destination" Type="Self.destination" Multiplicity="1" />
+    <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="destination">
+        <PropertyRef Name="idDestination" />
+      </Principal>
+      <Dependent Role="ticket">
+        <PropertyRef Name="finalDest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ticket_start_destination">
+    <End Role="destination" Type="Self.destination" Multiplicity="1" />
+    <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="destination">
+        <PropertyRef Name="idDestination" />
+      </Principal>
+      <Dependent Role="ticket">
+        <PropertyRef Name="startDest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="driver_qualification_fk">
+    <End Role="qualification" Type="Self.qualification" Multiplicity="1" />
+    <End Role="driver" Type="Self.driver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="qualification">
+        <PropertyRef Name="idQualification" />
+      </Principal>
+      <Dependent Role="driver">
+        <PropertyRef Name="idQualification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="list_driver_fk">
+    <End Role="driver" Type="Self.driver" Multiplicity="1" />
+    <End Role="driver_list" Type="Self.driver_list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="driver">
+        <PropertyRef Name="idDriver" />
+      </Principal>
+      <Dependent Role="driver_list">
+        <PropertyRef Name="idDriver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="list_driver_order_list_fk">
+    <End Role="order_list" Type="Self.order_list" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="driver_list" Type="Self.driver_list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order_list">
+        <PropertyRef Name="idOrder_item" />
+      </Principal>
+      <Dependent Role="driver_list">
+        <PropertyRef Name="idOrder_list" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="order_item_order_fk">
+    <End Role="order" Type="Self.order" Multiplicity="1" />
+    <End Role="order_list" Type="Self.order_list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="order_list">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="order_item_service_fk">
+    <End Role="service" Type="Self.service" Multiplicity="1" />
+    <End Role="order_list" Type="Self.order_list" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="idService" />
+      </Principal>
+      <Dependent Role="order_list">
+        <PropertyRef Name="idService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ticket_route_fk">
+    <End Role="route" Type="Self.route" Multiplicity="1" />
+    <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="route">
+        <PropertyRef Name="idRoute" />
+      </Principal>
+      <Dependent Role="ticket">
+        <PropertyRef Name="idRoute" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ticket_seat_fk">
+    <End Role="seat" Type="Self.seat" Multiplicity="1" />
+    <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seat">
+        <PropertyRef Name="idSeat" />
+      </Principal>
+      <Dependent Role="ticket">
+        <PropertyRef Name="idSeat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="service_car_service_fk">
+    <End Role="service" Type="Self.service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="service_car_type" Type="Self.service_car_type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="idService" />
+      </Principal>
+      <Dependent Role="service_car_type">
+        <PropertyRef Name="idService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AutoCompanyDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admin" EntityType="Self.admin" />
+    <EntitySet Name="bus" EntityType="Self.bus" />
+    <EntitySet Name="bus_selected" EntityType="Self.bus_selected" />
+    <EntitySet Name="car" EntityType="Self.car" />
+    <EntitySet Name="car_list" EntityType="Self.car_list" />
+    <EntitySet Name="car_type" EntityType="Self.car_type" />
+    <EntitySet Name="car_type_qual" EntityType="Self.car_type_qual" />
+    <EntitySet Name="customer" EntityType="Self.customer" />
+    <EntitySet Name="dest_route" EntityType="Self.dest_route" />
+    <EntitySet Name="destination" EntityType="Self.destination" />
+    <EntitySet Name="dispatcher" EntityType="Self.dispatcher" />
+    <EntitySet Name="driver" EntityType="Self.driver" />
+    <EntitySet Name="driver_list" EntityType="Self.driver_list" />
+    <EntitySet Name="order" EntityType="Self.order" />
+    <EntitySet Name="order_list" EntityType="Self.order_list" />
+    <EntitySet Name="qualification" EntityType="Self.qualification" />
+    <EntitySet Name="route" EntityType="Self.route" />
+    <EntitySet Name="seat" EntityType="Self.seat" />
+    <EntitySet Name="service" EntityType="Self.service" />
+    <EntitySet Name="service_car_type" EntityType="Self.service_car_type" />
+    <EntitySet Name="ticket" EntityType="Self.ticket" />
+    <AssociationSet Name="bus_selected_bus_fk" Association="Self.bus_selected_bus_fk">
+      <End Role="bus" EntitySet="bus" />
+      <End Role="bus_selected" EntitySet="bus_selected" />
+    </AssociationSet>
+    <AssociationSet Name="seat_bus_fk" Association="Self.seat_bus_fk">
+      <End Role="bus" EntitySet="bus" />
+      <End Role="seat" EntitySet="seat" />
+    </AssociationSet>
+    <AssociationSet Name="bus_selected_conductor_driver" Association="Self.bus_selected_conductor_driver">
+      <End Role="driver" EntitySet="driver" />
+      <End Role="bus_selected" EntitySet="bus_selected" />
+    </AssociationSet>
+    <AssociationSet Name="bus_selected_firstDriver_driver_fk" Association="Self.bus_selected_firstDriver_driver_fk">
+      <End Role="driver" EntitySet="driver" />
+      <End Role="bus_selected" EntitySet="bus_selected" />
+    </AssociationSet>
+    <AssociationSet Name="bus_selected_secondDriver_driver_fk" Association="Self.bus_selected_secondDriver_driver_fk">
+      <End Role="driver" EntitySet="driver" />
+      <End Role="bus_selected" EntitySet="bus_selected" />
+    </AssociationSet>
+    <AssociationSet Name="bus_selected_route_FK" Association="Self.bus_selected_route_FK">
+      <End Role="route" EntitySet="route" />
+      <End Role="bus_selected" EntitySet="bus_selected" />
+    </AssociationSet>
+    <AssociationSet Name="ticket_bus_fk" Association="Self.ticket_bus_fk">
+      <End Role="bus_selected" EntitySet="bus_selected" />
+      <End Role="ticket" EntitySet="ticket" />
+    </AssociationSet>
+    <AssociationSet Name="car_cartype_fk" Association="Self.car_cartype_fk">
+      <End Role="car_type" EntitySet="car_type" />
+      <End Role="car" EntitySet="car" />
+    </AssociationSet>
+    <AssociationSet Name="list_car" Association="Self.list_car">
+      <End Role="car" EntitySet="car" />
+      <End Role="car_list" EntitySet="car_list" />
+    </AssociationSet>
+    <AssociationSet Name="car_list_order_list_fk" Association="Self.car_list_order_list_fk">
+      <End Role="order_list" EntitySet="order_list" />
+      <End Role="car_list" EntitySet="car_list" />
+    </AssociationSet>
+    <AssociationSet Name="car_type_qual_car_type_fk" Association="Self.car_type_qual_car_type_fk">
+      <End Role="car_type" EntitySet="car_type" />
+      <End Role="car_type_qual" EntitySet="car_type_qual" />
+    </AssociationSet>
+    <AssociationSet Name="cartype_qualification_fk" Association="Self.cartype_qualification_fk">
+      <End Role="qualification" EntitySet="qualification" />
+      <End Role="car_type" EntitySet="car_type" />
+    </AssociationSet>
+    <AssociationSet Name="service_car_type_car_type_fk" Association="Self.service_car_type_car_type_fk">
+      <End Role="car_type" EntitySet="car_type" />
+      <End Role="service_car_type" EntitySet="service_car_type" />
+    </AssociationSet>
+    <AssociationSet Name="car_type_qual_qual_fk" Association="Self.car_type_qual_qual_fk">
+      <End Role="qualification" EntitySet="qualification" />
+      <End Role="car_type_qual" EntitySet="car_type_qual" />
+    </AssociationSet>
+    <AssociationSet Name="order_customer_fk" Association="Self.order_customer_fk">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="order" EntitySet="order" />
+    </AssociationSet>
+    <AssociationSet Name="ticket_customer_fk" Association="Self.ticket_customer_fk">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="ticket" EntitySet="ticket" />
+    </AssociationSet>
+    <AssociationSet Name="dest_route_destination_fk" Association="Self.dest_route_destination_fk">
+      <End Role="destination" EntitySet="destination" />
+      <End Role="dest_route" EntitySet="dest_route" />
+    </AssociationSet>
+    <AssociationSet Name="dest_route_route_fk" Association="Self.dest_route_route_fk">
+      <End Role="route" EntitySet="route" />
+      <End Role="dest_route" EntitySet="dest_route" />
+    </AssociationSet>
+    <AssociationSet Name="ticket_final_destination" Association="Self.ticket_final_destination">
+      <End Role="destination" EntitySet="destination" />
+      <End Role="ticket" EntitySet="ticket" />
+    </AssociationSet>
+    <AssociationSet Name="ticket_start_destination" Association="Self.ticket_start_destination">
+      <End Role="destination" EntitySet="destination" />
+      <End Role="ticket" EntitySet="ticket" />
+    </AssociationSet>
+    <AssociationSet Name="driver_qualification_fk" Association="Self.driver_qualification_fk">
+      <End Role="qualification" EntitySet="qualification" />
+      <End Role="driver" EntitySet="driver" />
+    </AssociationSet>
+    <AssociationSet Name="list_driver_fk" Association="Self.list_driver_fk">
+      <End Role="driver" EntitySet="driver" />
+      <End Role="driver_list" EntitySet="driver_list" />
+    </AssociationSet>
+    <AssociationSet Name="list_driver_order_list_fk" Association="Self.list_driver_order_list_fk">
+      <End Role="order_list" EntitySet="order_list" />
+      <End Role="driver_list" EntitySet="driver_list" />
+    </AssociationSet>
+    <AssociationSet Name="order_item_order_fk" Association="Self.order_item_order_fk">
+      <End Role="order" EntitySet="order" />
+      <End Role="order_list" EntitySet="order_list" />
+    </AssociationSet>
+    <AssociationSet Name="order_item_service_fk" Association="Self.order_item_service_fk">
+      <End Role="service" EntitySet="service" />
+      <End Role="order_list" EntitySet="order_list" />
+    </AssociationSet>
+    <AssociationSet Name="ticket_route_fk" Association="Self.ticket_route_fk">
+      <End Role="route" EntitySet="route" />
+      <End Role="ticket" EntitySet="ticket" />
+    </AssociationSet>
+    <AssociationSet Name="ticket_seat_fk" Association="Self.ticket_seat_fk">
+      <End Role="seat" EntitySet="seat" />
+      <End Role="ticket" EntitySet="ticket" />
+    </AssociationSet>
+    <AssociationSet Name="service_car_service_fk" Association="Self.service_car_service_fk">
+      <End Role="service" EntitySet="service" />
+      <End Role="service_car_type" EntitySet="service_car_type" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
