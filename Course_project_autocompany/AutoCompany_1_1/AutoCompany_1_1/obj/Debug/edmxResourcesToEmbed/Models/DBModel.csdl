@@ -5,7 +5,7 @@
       <PropertyRef Name="idAdmin" />
     </Key>
     <Property Name="idAdmin" Type="Int32" Nullable="false" />
-    <Property Name="workerCode" Type="Int32" Nullable="false" />
+    <Property Name="workerCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
@@ -130,7 +130,7 @@
       <PropertyRef Name="idDispatcher" />
     </Key>
     <Property Name="idDispatcher" Type="Int32" Nullable="false" />
-    <Property Name="workerCode" Type="Int32" Nullable="false" />
+    <Property Name="workerCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />

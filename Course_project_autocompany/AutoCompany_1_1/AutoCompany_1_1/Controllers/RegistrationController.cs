@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace AutoCompany_1_1.Controllers
 {
@@ -17,8 +12,10 @@ namespace AutoCompany_1_1.Controllers
         [HttpPost]
         public ActionResult Index(Models.User user)
         {
+            
             using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities()) 
             {
+                Session["User"] = user;
                 ent.customer.Add(Models.customer.Convert(user));
                 ent.SaveChanges();
             }

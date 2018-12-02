@@ -11,9 +11,8 @@ namespace AutoCompany_1_1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.SqlClient;
 
-    public partial class customer:User
+    public partial class customer : User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public customer()
@@ -23,11 +22,6 @@ namespace AutoCompany_1_1.Models
         }
 
         public int idCustomer { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<order> order { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ticket> ticket { get; set; }
 
         public static customer Convert(User v)
         {
@@ -41,25 +35,13 @@ namespace AutoCompany_1_1.Models
                 cus.patronymic = v.patronymic;
             }
             cus.phoneNumber = v.phoneNumber;
-            using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
-            {
-               
-                SqlCommand query = new SqlCommand("select max(idCustomer) from customer");
-                SqlConnection conn = new SqlConnection("Data Source=(localDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\AutoCompanyDB" +
-            ".mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=Ent" +
-            "ityFramework");
-                conn.Open();
-                query.Connection = conn;
-                var tmp = query.ExecuteScalar();
-                int id = 0;
-                if(!tmp.Equals(DBNull.Value))
-                {
-                    id = System.Convert.ToInt32(query.ExecuteScalar());
-                }
-                conn.Close();
-                cus.idCustomer = id + 1;
-            }
+            cus.workerCode = "";
             return cus;
         }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<order> order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ticket> ticket { get; set; }
     }
 }

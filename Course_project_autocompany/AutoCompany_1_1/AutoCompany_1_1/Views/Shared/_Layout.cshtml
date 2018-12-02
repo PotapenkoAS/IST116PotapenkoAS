@@ -4,11 +4,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>@ViewBag.Title – приложение ASP.NET</title>
+	<title>Auto Company</title>
 	@Styles.Render("~/Content/css")
 	@Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -18,11 +19,22 @@
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="navbar-collapse collapse" align="right">
+			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li>@Html.ActionLink("Админы", "Index", "Admin")</li>
 					<li>@Html.ActionLink("Машины", "Index", "Car")</li>
-					<li style="text-align:right">@Html.ActionLink("Регистрация", "Index", "Registration")</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					@if (Session["User"] != null)
+					{
+						AutoCompany_1_1.Models.User user = (AutoCompany_1_1.Models.User)(Session["User"]);
+						<li>@Html.ActionLink("Здарова, " + user.login, "Index", "UserHome")</li>
+					}
+					else
+					{
+						<li>@Html.ActionLink("Регистрация", "Index", "Registration")</li>
+						<li>@Html.ActionLink("Войти", "Index", "LogIn")</li>
+					}
 				</ul>
 			</div>
 		</div>

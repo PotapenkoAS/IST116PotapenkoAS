@@ -1,0 +1,14 @@
+﻿@model AutoCompany_1_1.Models.User
+
+@{
+	ViewBag.Title = "Index";
+	AutoCompany_1_1.Models.User user = new AutoCompany_1_1.Models.User();
+	user.login = "NotSetupped";
+	if (Session["User"] != null)
+	{
+		user = (AutoCompany_1_1.Models.User)Session["User"];
+	}
+}
+
+<h2>@user.login</h2>
+

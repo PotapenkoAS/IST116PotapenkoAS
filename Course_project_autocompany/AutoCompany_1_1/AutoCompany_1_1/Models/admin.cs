@@ -12,16 +12,9 @@ namespace AutoCompany_1_1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class admin
+    public partial class admin:User
     {
         public int idAdmin { get; set; }
-        public int workerCode { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public string surname { get; set; }
-        public string name { get; set; }
-        public string patronymic { get; set; }
-        public string phoneNumber { get; set; }
         public Nullable<int> experience { get; set; }
         public Nullable<int> salary { get; set; }
     }

@@ -25,11 +25,18 @@ namespace AutoCompany_1_1.Controllers
         [HttpPost]
         public ActionResult Create(car car)
         {
-            using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
+            if (ModelState.IsValid)
             {
-                ent.car.Add(car);
-                ent.SaveChanges();
-                return RedirectToAction("Index");
+                using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
+                {
+                    ent.car.Add(car);
+                    ent.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                return View();
             }
         }
     }

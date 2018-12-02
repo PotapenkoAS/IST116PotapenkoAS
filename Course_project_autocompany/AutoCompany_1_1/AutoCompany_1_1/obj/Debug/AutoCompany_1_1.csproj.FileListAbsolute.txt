@@ -96,8 +96,8 @@ C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\bin\ru\System.Web.
 C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\bin\ru\System.Web.WebPages.resources.dll
 C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\bin\ru\System.Web.WebPages.Deployment.resources.dll
 C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\bin\ru\System.Web.WebPages.Razor.resources.dll
+C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\obj\Debug\AutoCompany_1_1.csprojAssemblyReference.cache
 C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\obj\Debug\AutoCompany_1_1.csproj.CoreCompileInputs.cache
 C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\obj\Debug\AutoCompany_1_1.csproj.CopyComplete
 C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\obj\Debug\AutoCompany_1_1.dll
 C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\obj\Debug\AutoCompany_1_1.pdb
-C:\Users\AtApse2\source\repos\AutoCompany_1_1\AutoCompany_1_1\obj\Debug\AutoCompany_1_1.csprojAssemblyReference.cache

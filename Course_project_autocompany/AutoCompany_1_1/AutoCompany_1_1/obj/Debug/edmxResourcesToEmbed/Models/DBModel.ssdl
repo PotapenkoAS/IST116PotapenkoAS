@@ -4,8 +4,8 @@
     <Key>
       <PropertyRef Name="idAdmin" />
     </Key>
-    <Property Name="idAdmin" Type="int" Nullable="false" />
-    <Property Name="workerCode" Type="int" Nullable="false" />
+    <Property Name="idAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="workerCode" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="login" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="surname" Type="varchar" MaxLength="255" Nullable="false" />
@@ -74,7 +74,7 @@
     <Key>
       <PropertyRef Name="idCustomer" />
     </Key>
-    <Property Name="idCustomer" Type="int" Nullable="false" />
+    <Property Name="idCustomer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="login" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
@@ -104,8 +104,8 @@
     <Key>
       <PropertyRef Name="idDispatcher" />
     </Key>
-    <Property Name="idDispatcher" Type="int" Nullable="false" />
-    <Property Name="workerCode" Type="int" Nullable="false" />
+    <Property Name="idDispatcher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="workerCode" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="login" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="surname" Type="varchar" MaxLength="255" Nullable="false" />
@@ -119,7 +119,7 @@
     <Key>
       <PropertyRef Name="idDriver" />
     </Key>
-    <Property Name="idDriver" Type="int" Nullable="false" />
+    <Property Name="idDriver" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="workerCode" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="login" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />

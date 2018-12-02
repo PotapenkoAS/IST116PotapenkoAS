@@ -8,14 +8,17 @@ namespace AutoCompany_1_1.Models
 {
     public class User
     {
-        [Required(ErrorMessage = "login required")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "huy")]
+        [Required]
         public string login { get; set; }
+        [Required]
         public string password { get; set; }
+        [Required]
         public string surname { get; set; }
+        [Required]
         public string name { get; set; }
         public string patronymic { get; set; }
+        [Required]
         public string phoneNumber { get; set; }
-
+        public string workerCode { get; set; }
     }
 }

@@ -11,7 +11,8 @@ namespace AutoCompany_1_1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class car
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,7 @@ namespace AutoCompany_1_1.Models
         {
             this.car_list = new HashSet<car_list>();
         }
-    
+        [Required]
         public int idCar { get; set; }
         public int idCarType { get; set; }
         public string desctiption { get; set; }
