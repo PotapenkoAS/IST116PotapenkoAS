@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using AutoCompany_1_1.Models;
 
 namespace AutoCompany_1_1.Controllers
 {
@@ -10,16 +11,28 @@ namespace AutoCompany_1_1.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(Models.User user)
+        public ActionResult Index(User user)
         {
-            
-            using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities()) 
+
+            using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
             {
-                Session["User"] = user;
-                ent.customer.Add(Models.customer.Convert(user));
-                ent.SaveChanges();
+                if (user.workerCode == null)
+                {
+                    user.workerCode = "";
+                }
+                if (!Models.User.Contains(user.login))
+                {
+                    Session["User"] = user;
+                    ent.customer.Add(customer.Convert(user));
+                    ent.SaveChanges();
+                }
+                else
+                {
+                    ViewData["ErrorMessage"] = "Пользователь с таким логином уже существует";
+                    return View();
+                }
             }
-                return RedirectToAction("..");
+            return RedirectToAction("..");
         }
     }
 }

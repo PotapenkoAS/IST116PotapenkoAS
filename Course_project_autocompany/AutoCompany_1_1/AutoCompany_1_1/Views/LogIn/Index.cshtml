@@ -25,6 +25,12 @@
 				@Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
 			</div>
 		</div>
+		@{
+			if (ViewData["ErrorMessage"] != null)
+			{
+				<p style="color:red">@ViewData["ErrorMessage"]</p>
+			}
+		}
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<input type="submit" value="Log In" class="btn btn-default" />

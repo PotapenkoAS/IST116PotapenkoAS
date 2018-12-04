@@ -19,13 +19,19 @@ namespace AutoCompany_1_1.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
+                var user = Models.User.getUserByLP(lp);
+                if (user == null)
                 {
-                    User user = ent.customer.Where(a => a.login == lp.login && a.password == lp.password).First();
-                    if (user != null)
+                    ViewData["ErrorMessage"] = "Неверное имя или пароль";
+                    return View();
+                }
+                else if (user.login != null)
+                {
+                    if (user.workerCode == null)
                     {
-                        Session["User"] = user;
+                        user.workerCode = "";
                     }
+                    Session["User"] = user;
                 }
                 return RedirectToAction("..");
             }
@@ -33,7 +39,7 @@ namespace AutoCompany_1_1.Controllers
             {
                 return View();
             }
-           
+
         }
     }
 }

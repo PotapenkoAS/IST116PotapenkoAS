@@ -10,5 +10,16 @@
 	}
 }
 
-<h2>@user.login</h2>
+<h2>@user.getRole()</h2><hr />
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	<div class="form-horizontal">
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="log out" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
 
