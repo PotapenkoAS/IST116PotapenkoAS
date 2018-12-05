@@ -2,24 +2,72 @@
 
 @{
 	ViewBag.Title = "Index";
-	AutoCompany_1_1.Models.User user = new AutoCompany_1_1.Models.User();
-	user.login = "NotSetupped";
-	if (Session["User"] != null)
+}
+@if (Session["User"] != null)
+{
+	AutoCompany_1_1.Models.User user = (AutoCompany_1_1.Models.User)Session["User"];
+	<h2>@user.getRole()</h2><hr />
+	<script>
+		function revert() {
+
+			if ($("#login,#name,#surname,#patronymic,#phoneNumber").attr('readonly') === 'true' || $("#login").attr('readonly') === 'readonly') {
+				$("#login,#name,#surname,#patronymic,#phoneNumber").removeAttr('readonly')
+				$("#saveBtn").attr('style', 'display:block')
+
+			} else {
+				$("#login,#name,#surname,#patronymic,#phoneNumber").attr('readonly', 'true')
+				$("#saveBtn").attr('style', 'display:none')
+			}
+		}
+	</script>
+	<div class="col-md-offset-2 col-md-10">
+		@if (ViewData["ErrorMessage"] != null)
+		{
+			<p style="color:red">@ViewData["ErrorMessage"]</p>
+		}
+	</div>
+	<input type="button" value="Редактировать" onclick="revert()" />
+	using (Html.BeginForm("Edit", "UserHome"))
 	{
-		user = (AutoCompany_1_1.Models.User)Session["User"];
+		<div class="col-md-offset-2 col-md-10">
+			@Html.EditorFor(model => model.login, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "login" } })
+
+		</div>
+
+		<div class="col-md-offset-2 col-md-10">
+			@Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "name" } })
+		</div>
+
+		<div class="col-md-offset-2 col-md-10">
+			@Html.EditorFor(model => model.surname, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "surname" } })
+		</div>
+
+		<div class="col-md-offset-2 col-md-10">
+			@Html.EditorFor(model => model.patronymic, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "patronymic" } })
+		</div>
+
+		<div class="col-md-offset-2 col-md-10">
+			@Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "phoneNumber" } })
+		</div>
+		<div class="col-md-offset-2 col-md-10 form-group" id="saveBtn" style="display:none">
+			<input type="submit" value="save" class="btn btn-default" />
+		</div>
+	}
+	using (Html.BeginForm("LogOut", "UserHome"))
+	{
+		@Html.AntiForgeryToken()
+		<br />
+		<div class="col-md-offset-1 col-md-10" style="display:contents">
+			<input type="submit" value="log out" class="btn btn-default" />
+		</div>
 	}
 }
-
-<h2>@user.getRole()</h2><hr />
-@using (Html.BeginForm())
+else
 {
-	@Html.AntiForgeryToken()
-	<div class="form-horizontal">
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="log out" class="btn btn-default" />
-			</div>
-		</div>
+	<div class="col-md-offset-2 col-md-10">
+		<p style="color:red ;font-size:larger">Выполните вход</p>
 	</div>
 }
+
+
 

@@ -30,6 +30,10 @@ namespace AutoCompany_1_1.Models
             Regex driverReg = new Regex(@"^\d");
             Regex dispatcherReg = new Regex(@"^[a-z]", RegexOptions.IgnoreCase);
             Regex adminReg = new Regex(@"^[\.\$\^\{\[\(\|\)\*\+\?\\]");
+            if (workerCode == null)
+            {
+                workerCode = "";
+            }
             if (driverReg.IsMatch(workerCode))
             {
                 return "driver";
@@ -45,7 +49,7 @@ namespace AutoCompany_1_1.Models
                 return "admin";
             }
             else
-                return "user";
+                return "customer";
         }
 
         public static User getUserByLP(LoginPassword lp)
@@ -77,7 +81,7 @@ namespace AutoCompany_1_1.Models
             }
         }
 
-        public static bool Contains(string login)
+        public static User Find(string login)
         {
             User user;
             using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
@@ -101,15 +105,42 @@ namespace AutoCompany_1_1.Models
                 catch (InvalidOperationException e)
                 {
                     user = null;
+                    Console.Write(e.StackTrace);
                 }
             }
-            if (user != null)
+            return user;
+        }
+        public static bool Update(User oldUser,User newUser)
+        {
+            SqlConnection conn = new SqlConnection();
+            try
             {
+                using (conn = new SqlConnection("Data Source=(localDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\AtApse2\\source\\repos\\AutoCompany_1_1\\AutoCompany_1_1\\App_Data\\AutoCompanyDB.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework"))
+                {
+                    conn.Open();
+                    //string query = "update @table set login=@login,name=@name,surname=@surname,patronymic=@patronymic,phoneNumber=@phoneNumber where login=@oldLogin";
+                    string query = String.Format("update {0} set login=@login,name=@name,surname=@surname,patronymic=@patronymic,phoneNumber=@phoneNumber where login=@oldLogin", "[" + oldUser.getRole() + "]");
+                    SqlCommand command = new SqlCommand(query, conn);
+                   // command.Parameters.AddWithValue("@table", "["+oldUser.getRole()+"]");
+                    command.Parameters.AddWithValue("@login",newUser.login);
+                    command.Parameters.AddWithValue("@name",newUser.name);
+                    command.Parameters.AddWithValue("@surname",newUser.surname);
+                    command.Parameters.AddWithValue("@patronymic",newUser.patronymic);
+                    command.Parameters.AddWithValue("@phoneNumber",newUser.phoneNumber);
+                    command.Parameters.AddWithValue("@oldLogin",oldUser.login);
+                    command.ExecuteNonQuery();  
+                }
                 return true;
             }
-            else {
+            catch (Exception e)
+            { 
                 return false;
             }
+            finally
+            {
+                conn.Close();
+            }
         }
+
     }
 }

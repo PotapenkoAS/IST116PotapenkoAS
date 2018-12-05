@@ -13,18 +13,17 @@ namespace AutoCompany_1_1.Controllers
         [HttpPost]
         public ActionResult Index(User user)
         {
-
             using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
             {
                 if (user.workerCode == null)
                 {
                     user.workerCode = "";
                 }
-                if (!Models.User.Contains(user.login))
+                if (Models.User.Find(user.login)!=null)
                 {
                     Session["User"] = user;
                     ent.customer.Add(customer.Convert(user));
-                    ent.SaveChanges();
+                    ent.SaveChanges();  
                 }
                 else
                 {

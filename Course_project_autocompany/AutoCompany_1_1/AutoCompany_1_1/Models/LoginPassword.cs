@@ -13,5 +13,15 @@ namespace AutoCompany_1_1.Models
         [Required]
         [StringLength(maximumLength:50, MinimumLength = 4)]
         public string password { get; set; }
+
+        public LoginPassword(string login,string password)
+        {
+            this.login = login;
+            this.password = password;
+        }
+        public LoginPassword()
+        {
+            
+        }
     }
 }
