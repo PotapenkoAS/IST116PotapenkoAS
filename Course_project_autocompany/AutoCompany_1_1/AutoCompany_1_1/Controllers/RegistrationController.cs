@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using AutoCompany_1_1.Models;
 
 namespace AutoCompany_1_1.Controllers
@@ -19,15 +20,25 @@ namespace AutoCompany_1_1.Controllers
                 {
                     user.workerCode = "";
                 }
-                if (Models.User.Find(user.login)!=null)
+                List<string> errors = user.Validation();
+                if (errors == null)
                 {
-                    Session["User"] = user;
-                    ent.customer.Add(customer.Convert(user));
-                    ent.SaveChanges();  
+                    if (Models.User.Find(user.login) == null)
+                    {
+                        Session["User"] = user;
+                        ent.customer.Add(customer.Convert(user));
+                        ent.SaveChanges();
+                    }
+                    else
+                    {
+                        errors.Add("Пользователь с таким логином уже существует");
+                        ViewData["ErrorMessage"] = errors;
+                        return View();
+                    }
                 }
                 else
                 {
-                    ViewData["ErrorMessage"] = "Пользователь с таким логином уже существует";
+                    ViewData["ErrorMessage"] = errors;
                     return View();
                 }
             }

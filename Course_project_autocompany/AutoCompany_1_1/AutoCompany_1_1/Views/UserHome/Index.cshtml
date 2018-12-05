@@ -13,29 +13,25 @@
 			if ($("#login,#name,#surname,#patronymic,#phoneNumber").attr('readonly') === 'true' || $("#login").attr('readonly') === 'readonly') {
 				$("#login,#name,#surname,#patronymic,#phoneNumber").removeAttr('readonly')
 				$("#saveBtn").attr('style', 'display:block')
-
+				
 			} else {
 				$("#login,#name,#surname,#patronymic,#phoneNumber").attr('readonly', 'true')
 				$("#saveBtn").attr('style', 'display:none')
 			}
 		}
 	</script>
-	<div class="col-md-offset-2 col-md-10">
-		@if (ViewData["ErrorMessage"] != null)
-		{
-			<p style="color:red">@ViewData["ErrorMessage"]</p>
-		}
-	</div>
+	
 	<input type="button" value="Редактировать" onclick="revert()" />
-	using (Html.BeginForm("Edit", "UserHome"))
+	using (Html.BeginForm("Index","UserHome"))
 	{
 		<div class="col-md-offset-2 col-md-10">
 			@Html.EditorFor(model => model.login, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "login" } })
-
+			@Html.ValidationMessageFor(model => model.login, "", new { @class = "text-danger" })
 		</div>
 
 		<div class="col-md-offset-2 col-md-10">
 			@Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "name" } })
+			@Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
 		</div>
 
 		<div class="col-md-offset-2 col-md-10">

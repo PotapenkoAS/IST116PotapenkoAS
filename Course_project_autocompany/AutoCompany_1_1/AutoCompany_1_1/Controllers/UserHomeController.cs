@@ -21,18 +21,29 @@ namespace AutoCompany_1_1.Controllers
             return RedirectToAction("..");
         }
         [HttpPost]
-        public ActionResult Edit(Models.User newUser)
+        public ActionResult Index(Models.User newUser)
         {
             using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
             {
-                var oldUser = Models.User.Find(((Models.User)Session["User"]).login);
-                if(Models.User.Update(oldUser, newUser))
+                Models.User oldUser = (Models.User)Session["User"];
+                newUser.password = oldUser.password;
+                newUser.workerCode = oldUser.workerCode;
+                List<string> errors = newUser.Validation();
+                if (errors == null)
                 {
-                    Session["User"] = newUser;
+                    if (Models.User.Update(oldUser, newUser))
+                    {
+                        Session["User"] = newUser;
+                    }
+                    else
+                    {
+                        ViewData["ErrorMessage"] = "Что-то пошло не так";
+                    }
                 }
                 else
                 {
-                    ViewData["ErrorMessage"] = "Что-то пошло не так";
+                    ViewData["ErrorMessage"] = errors;
+                    return View();
                 }
                 return RedirectToAction("Index");
             }

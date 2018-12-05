@@ -13,8 +13,10 @@ namespace AutoCompany_1_1.Models
     public class User
     {
         [Required]
+        [StringLength(30, MinimumLength = 3)]
         public string login { get; set; }
         [Required]
+        [StringLength(30, MinimumLength = 3)]
         public string password { get; set; }
         [Required]
         public string surname { get; set; }
@@ -51,7 +53,42 @@ namespace AutoCompany_1_1.Models
             else
                 return "customer";
         }
-
+        public List<string> Validation()
+        {
+            List<string> errors = new List<string>();
+            if (login == null || login.Length < 3 || login.Length > 30)
+            {
+                errors.Add("Неверный логин");
+            }
+            if (password == null || password.Length < 3 || password.Length > 30)
+            {
+                errors.Add("Неверный логин");
+            }
+            if (name == null)
+            {
+                errors.Add("Укажите имя");
+            }
+            if (surname == null)
+            {
+                errors.Add("Укажите фамилию");
+            }
+            if (phoneNumber == null)
+            {
+                errors.Add("Укажите номер телефона");
+            }
+            if (workerCode == null)
+            {
+                errors.Add("Укажите код работника");
+            }
+            if (errors.Count > 0)
+            {
+                return errors;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public static User getUserByLP(LoginPassword lp)
         {
             using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
@@ -93,6 +130,11 @@ namespace AutoCompany_1_1.Models
                     {
                         user = ent.admin.Where(a => a.login == login).FirstOrDefault();
                     }
+                    else
+                    {
+                        user.workerCode = "";
+                        return user;
+                    }
                     if (user == null)
                     {
                         user = ent.driver.Where(a => a.login == login).FirstOrDefault();
@@ -110,37 +152,30 @@ namespace AutoCompany_1_1.Models
             }
             return user;
         }
-        public static bool Update(User oldUser,User newUser)
+        public static bool Update(User oldUser, User newUser)
         {
-            SqlConnection conn = new SqlConnection();
             try
             {
-                using (conn = new SqlConnection("Data Source=(localDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\AtApse2\\source\\repos\\AutoCompany_1_1\\AutoCompany_1_1\\App_Data\\AutoCompanyDB.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework"))
+                using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
                 {
-                    conn.Open();
-                    //string query = "update @table set login=@login,name=@name,surname=@surname,patronymic=@patronymic,phoneNumber=@phoneNumber where login=@oldLogin";
-                    string query = String.Format("update {0} set login=@login,name=@name,surname=@surname,patronymic=@patronymic,phoneNumber=@phoneNumber where login=@oldLogin", "[" + oldUser.getRole() + "]");
-                    SqlCommand command = new SqlCommand(query, conn);
-                   // command.Parameters.AddWithValue("@table", "["+oldUser.getRole()+"]");
-                    command.Parameters.AddWithValue("@login",newUser.login);
-                    command.Parameters.AddWithValue("@name",newUser.name);
-                    command.Parameters.AddWithValue("@surname",newUser.surname);
-                    command.Parameters.AddWithValue("@patronymic",newUser.patronymic);
-                    command.Parameters.AddWithValue("@phoneNumber",newUser.phoneNumber);
-                    command.Parameters.AddWithValue("@oldLogin",oldUser.login);
-                    command.ExecuteNonQuery();  
+                    string query = string.Format("update {0} set login=@login,name=@name,surname=@surname,patronymic=@patronymic,phoneNumber=@phoneNumber where login=@oldLogin", "[" + oldUser.getRole() + "]");
+                    ent.Database.ExecuteSqlCommand(query,
+                        new SqlParameter("@login", newUser.login),
+                        new SqlParameter("@name", newUser.name),
+                        new SqlParameter("@surname", newUser.surname),
+                        new SqlParameter("@patronymic", newUser.patronymic),
+                        new SqlParameter("@phoneNumber", newUser.phoneNumber),
+                        new SqlParameter("@oldLogin", oldUser.login)
+                        );
                 }
                 return true;
             }
             catch (Exception e)
-            { 
+            {
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
         }
+
 
     }
 }
