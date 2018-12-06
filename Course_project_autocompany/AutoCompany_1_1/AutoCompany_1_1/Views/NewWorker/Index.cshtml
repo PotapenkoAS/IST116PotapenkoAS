@@ -1,0 +1,47 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("NewDriver", "NewWorker"))
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" style="width:200px; height:150px; font-size:30px" value="Водитель" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+@using (Html.BeginForm("NewAdmin", "NewWorker"))
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" style="width:200px; height:150px; font-size:30px" value="Администратор" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+@using (Html.BeginForm("NewDispatcher", "NewWorker"))
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" style="width:200px; height:150px; font-size:30px" value="Диспетчер" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+
+

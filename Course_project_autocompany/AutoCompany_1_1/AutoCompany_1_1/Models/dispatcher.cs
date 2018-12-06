@@ -17,5 +17,21 @@ namespace AutoCompany_1_1.Models
         public int idDispatcher { get; set; }
         public Nullable<int> experience { get; set; }
         public Nullable<int> salary { get; set; }
+
+        public static dispatcher Convert(User v)
+        {
+            dispatcher d = new dispatcher();
+            d.login = v.login;
+            d.password = v.password;
+            d.surname = v.surname;
+            d.name = v.name;
+            if (v.patronymic != null)
+            {
+                d.patronymic = v.patronymic;
+            }
+            d.phoneNumber = v.phoneNumber;
+            d.workerCode = v.workerCode;
+            return d;
+        }
     }
 }

@@ -37,5 +37,21 @@ namespace AutoCompany_1_1.Models
         public virtual qualification qualification { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<driver_list> driver_list { get; set; }
+
+        public static driver Convert(User v)
+        {
+            driver d = new driver();
+            d.login = v.login;
+            d.password = v.password;
+            d.surname = v.surname;
+            d.name = v.name;
+            if (v.patronymic != null)
+            {
+                d.patronymic = v.patronymic;
+            }
+            d.phoneNumber = v.phoneNumber;
+            d.workerCode = v.workerCode;
+            return d;
+        }
     }
 }

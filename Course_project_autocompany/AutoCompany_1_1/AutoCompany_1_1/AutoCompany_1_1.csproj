@@ -155,6 +155,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
+    <Compile Include="Controllers\NewWorkerController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\UserHomeController.cs" />
     <Compile Include="Models\admin.cs">
@@ -324,6 +325,8 @@
     <Content Include="Views\UserHome\Index.cshtml" />
     <Content Include="Views\LogIn\Index.cshtml" />
     <Content Include="Views\Shared\newLayout.cshtml" />
+    <Content Include="Views\NewWorker\Index.cshtml" />
+    <Content Include="Views\NewWorker\NewDriver.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

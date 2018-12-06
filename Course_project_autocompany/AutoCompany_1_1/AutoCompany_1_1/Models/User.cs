@@ -176,6 +176,40 @@ namespace AutoCompany_1_1.Models
             }
         }
 
+        public static string generateCode(string role)
+        {
+            Regex adminReg = new Regex(@"^[\.\$\^\{\[\(\|\)\*\+\?\\]");//  .$^{](|)]}?\     (|) 33-125 i
+            string code;
+            string syms = @".$^{](|)]}?\";
+            Random rnd = new Random();
 
+            switch (role)
+            {
+                case "admin":
+                    code = syms[rnd.Next(syms.Length)].ToString();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        code += Convert.ToChar(rnd.Next(33, 126)).ToString();
+                    }
+                    break;
+                case "driver":
+                    code = rnd.Next(10).ToString();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        code += Convert.ToChar(rnd.Next(33, 126)).ToString();
+                    }
+                    break;
+                case "dispatcher":
+                    code = rnd.Next(97, 123).ToString();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        code += Convert.ToChar(rnd.Next(33, 126)).ToString();
+                    }
+                    break;
+                default:
+                    return null;
+            }
+            return code;
+        }
     }
 }

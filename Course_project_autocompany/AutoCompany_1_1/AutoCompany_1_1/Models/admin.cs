@@ -17,5 +17,22 @@ namespace AutoCompany_1_1.Models
         public int idAdmin { get; set; }
         public Nullable<int> experience { get; set; }
         public Nullable<int> salary { get; set; }
+
+        public static admin Convert(User v)
+        {
+            admin adm = new admin();
+            adm.login = v.login;
+            adm.password = v.password;
+            adm.surname = v.surname;
+            adm.name = v.name;
+            if (v.patronymic != null)
+            {
+                adm.patronymic = v.patronymic;
+            }
+            adm.phoneNumber = v.phoneNumber;
+            adm.workerCode = v.workerCode;
+            return adm;
+        }
     }
+    
 }

@@ -21,13 +21,22 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li>@Html.ActionLink("Админы", "Index", "Admin")</li>
-					<li>@Html.ActionLink("Машины", "Index", "Car")</li>
+					<li>@Html.ActionLink("Главная","Index","Home")</li>
+					@{
+						AutoCompany_1_1.Models.User user = new AutoCompany_1_1.Models.User();
+						if (Session["user"] != null)
+						{
+							user = (AutoCompany_1_1.Models.User)Session["User"];
+							if (user.getRole() == "admin")
+							{
+								<li>@Html.ActionLink("Новый работник", "Index", "NewWorker")</li>
+							}
+						}
+					}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Session["User"] != null)
 					{
-						AutoCompany_1_1.Models.User user = (AutoCompany_1_1.Models.User)(Session["User"]);
 						<li>@Html.ActionLink("Здарова, " + user.login, "Index", "UserHome")</li>
 					}
 					else
