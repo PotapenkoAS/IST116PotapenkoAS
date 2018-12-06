@@ -61,16 +61,15 @@ namespace AutoCompany_1_1.Controllers
         {
             using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
             {
-                List<string> list = (from a in ent.qualification select a.name).ToList();
-                int i = 1;
+                List<Models.qualification> list = (from a in ent.qualification select a).ToList();
                 ViewData["idQualification"] = new List<SelectListItem>();
-                foreach (string el in list)
+                ViewData["Code"] = Models.User.generateCode("driver");
+                foreach (Models.qualification el in list)
                 {
                     SelectListItem item = new SelectListItem();
-                    item.Value = i.ToString();
-                    item.Text = el;
+                    item.Value = el.idQualification.ToString();
+                    item.Text = el.name;
                     (ViewData["idQualification"] as List<SelectListItem>).Add(item);
-                    i++;
                 }
             }
             return View();
@@ -79,7 +78,21 @@ namespace AutoCompany_1_1.Controllers
         [HttpPost]
         public ActionResult NewDriver(Models.driver driver)
         {
-            return View(driver);
+            using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
+            {
+                List<Models.qualification> list = (from a in ent.qualification select a).ToList();
+                ViewData["idQualification"] = new List<SelectListItem>();
+                ViewData["Code"] = Models.User.generateCode("driver");
+                foreach (Models.qualification el in list)
+                {
+                    SelectListItem item = new SelectListItem();
+                    item.Value = el.idQualification.ToString();
+                    item.Text = el.name;
+                    (ViewData["idQualification"] as List<SelectListItem>).Add(item);
+                }
+            }
+            return View();
+            return RedirectToAction("NewDriver");
         }
     }
 }

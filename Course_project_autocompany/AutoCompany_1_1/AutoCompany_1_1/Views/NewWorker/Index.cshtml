@@ -4,7 +4,7 @@
 
 <h2>Index</h2>
 
-@using (Html.BeginForm("NewDriver", "NewWorker"))
+@using (Html.BeginForm("NewDriver", "NewWorker",FormMethod.Get))
 {
 	@Html.AntiForgeryToken()
 
