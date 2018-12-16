@@ -15,24 +15,21 @@ namespace AutoCompany_1_1.Models
     public partial class admin:User
     {
         public int idAdmin { get; set; }
+      
         public Nullable<int> experience { get; set; }
         public Nullable<int> salary { get; set; }
 
         public static admin Convert(User v)
         {
-            admin adm = new admin();
-            adm.login = v.login;
-            adm.password = v.password;
-            adm.surname = v.surname;
-            adm.name = v.name;
-            if (v.patronymic != null)
-            {
-                adm.patronymic = v.patronymic;
-            }
-            adm.phoneNumber = v.phoneNumber;
-            adm.workerCode = v.workerCode;
-            return adm;
+            var a = new admin();
+            a.login = v.login;
+            a.password = v.password;
+            a.name = v.name;
+            a.surname = v.surname;
+            a.patronymic = v.patronymic;
+            a.phoneNumber = v.phoneNumber;
+            a.workerCode = v.workerCode;
+            return a;
         }
     }
-    
 }

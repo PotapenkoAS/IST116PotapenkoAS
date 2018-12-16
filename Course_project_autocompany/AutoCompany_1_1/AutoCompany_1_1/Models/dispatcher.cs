@@ -11,27 +11,25 @@ namespace AutoCompany_1_1.Models
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class dispatcher : User
+    
+    public partial class dispatcher:User
     {
         public int idDispatcher { get; set; }
+       
         public Nullable<int> experience { get; set; }
         public Nullable<int> salary { get; set; }
 
         public static dispatcher Convert(User v)
         {
-            dispatcher d = new dispatcher();
-            d.login = v.login;
-            d.password = v.password;
-            d.surname = v.surname;
-            d.name = v.name;
-            if (v.patronymic != null)
-            {
-                d.patronymic = v.patronymic;
-            }
-            d.phoneNumber = v.phoneNumber;
-            d.workerCode = v.workerCode;
-            return d;
+            var a = new dispatcher();
+            a.login = v.login;
+            a.password = v.password;
+            a.name = v.name;
+            a.surname = v.surname;
+            a.patronymic = v.patronymic;
+            a.phoneNumber = v.phoneNumber;
+            a.workerCode = v.workerCode;
+            return a;
         }
     }
 }

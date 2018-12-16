@@ -11,8 +11,8 @@ namespace AutoCompany_1_1.Models
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class customer : User
+    
+    public partial class customer:User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public customer()
@@ -20,25 +20,21 @@ namespace AutoCompany_1_1.Models
             this.order = new HashSet<order>();
             this.ticket = new HashSet<ticket>();
         }
-
+    
         public int idCustomer { get; set; }
 
         public static customer Convert(User v)
         {
-            customer cus = new customer();
-            cus.login = v.login;
-            cus.password = v.password;
-            cus.surname = v.surname;
-            cus.name = v.name;
-            if (v.patronymic != null)
-            {
-                cus.patronymic = v.patronymic;
-            }
-            cus.phoneNumber = v.phoneNumber;
-            cus.workerCode = "";
-            return cus;
+            var a = new customer();
+            a.login = v.login;
+            a.password = v.password;
+            a.name = v.name;
+            a.surname = v.surname;
+            a.patronymic = v.patronymic;
+            a.phoneNumber = v.phoneNumber;
+            a.workerCode = "";
+            return a;
         }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> order { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

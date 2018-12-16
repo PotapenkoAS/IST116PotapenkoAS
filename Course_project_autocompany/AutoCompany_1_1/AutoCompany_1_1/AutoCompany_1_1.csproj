@@ -156,25 +156,27 @@
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\NewWorkerController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\RouteController.cs" />
+    <Compile Include="Controllers\SetupDriverController.cs" />
     <Compile Include="Controllers\UserHomeController.cs" />
-    <Compile Include="Models\admin.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\WorkerInfoController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Models\AdminDAO.cs" />
-    <Compile Include="Models\bus.cs">
+    <Compile Include="Models\admin.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\bus_selected.cs">
+    <Compile Include="Models\AdminDAO.cs" />
+    <Compile Include="Models\bus.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\car.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CarDAO.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\car_list.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -184,7 +186,6 @@
     <Compile Include="Models\car_type_qual.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\customer.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -203,6 +204,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Models\destination.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -218,9 +222,6 @@
     <Compile Include="Models\driver_list.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Models\LoginPassword.cs" />
     <Compile Include="Models\order.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -228,14 +229,13 @@
     <Compile Include="Models\order_list.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\qualification.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\route.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RouteDateTime.cs" />
     <Compile Include="Models\seat.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -245,9 +245,15 @@
     <Compile Include="Models\service_car_type.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\setupped_route.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Shedule.cs" />
     <Compile Include="Models\ticket.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -327,6 +333,17 @@
     <Content Include="Views\Shared\newLayout.cshtml" />
     <Content Include="Views\NewWorker\Index.cshtml" />
     <Content Include="Views\NewWorker\NewDriver.cshtml" />
+    <Content Include="Views\NewWorker\NewAdmin.cshtml" />
+    <Content Include="Views\NewWorker\NewDispatcher.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\CarOrder.cshtml" />
+    <Content Include="Views\SetupDriver\Index.cshtml" />
+    <Content Include="Views\Route\Details.cshtml" />
+    <Content Include="Views\SetupDriver\Create.cshtml" />
+    <Content Include="Views\WorkerInfo\Index.cshtml" />
+    <Content Include="Views\SetupDriver\Edit.cshtml" />
+    <Content Include="Views\UserHome\Shedule.cshtml" />
+    <Content Include="Views\SetupDriver\CreateSecondStep.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

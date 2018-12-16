@@ -19,29 +19,17 @@
     <Key>
       <PropertyRef Name="idBus" />
     </Key>
-    <Property Name="idBus" Type="int" Nullable="false" />
+    <Property Name="idBus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="255" />
     <Property Name="seatCount" Type="int" />
     <Property Name="color" Type="varchar" MaxLength="255" />
     <Property Name="regNumber" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <EntityType Name="bus_selected">
-    <Key>
-      <PropertyRef Name="idBus_selected" />
-    </Key>
-    <Property Name="idBus_selected" Type="int" Nullable="false" />
-    <Property Name="idRoute" Type="int" Nullable="false" />
-    <Property Name="idBus" Type="int" Nullable="false" />
-    <Property Name="date" Type="date" />
-    <Property Name="idFirstDriver" Type="int" Nullable="false" />
-    <Property Name="idSecondDriver" Type="int" />
-    <Property Name="idConductor" Type="int" />
-  </EntityType>
   <EntityType Name="car">
     <Key>
       <PropertyRef Name="idCar" />
     </Key>
-    <Property Name="idCar" Type="int" Nullable="false" />
+    <Property Name="idCar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idCarType" Type="int" Nullable="false" />
     <Property Name="desctiption" Type="text" />
     <Property Name="regNumber" Type="varchar" MaxLength="50" Nullable="false" />
@@ -50,7 +38,7 @@
     <Key>
       <PropertyRef Name="idCar_list" />
     </Key>
-    <Property Name="idCar_list" Type="int" Nullable="false" />
+    <Property Name="idCar_list" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idCar" Type="int" Nullable="false" />
     <Property Name="idOrder_list" Type="int" Nullable="false" />
   </EntityType>
@@ -58,7 +46,7 @@
     <Key>
       <PropertyRef Name="idCarType" />
     </Key>
-    <Property Name="idCarType" Type="int" Nullable="false" />
+    <Property Name="idCarType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="idQualification" Type="int" Nullable="false" />
   </EntityType>
@@ -66,7 +54,7 @@
     <Key>
       <PropertyRef Name="idCar_type_qual" />
     </Key>
-    <Property Name="idCar_type_qual" Type="int" Nullable="false" />
+    <Property Name="idCar_type_qual" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idCarType" Type="int" Nullable="false" />
     <Property Name="idQualification" Type="int" Nullable="false" />
   </EntityType>
@@ -81,12 +69,13 @@
     <Property Name="surname" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="patronymic" Type="varchar" MaxLength="255" />
     <Property Name="phoneNumber" Type="varchar" MaxLength="255" />
+    <Property Name="workerCode" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="dest_route">
     <Key>
       <PropertyRef Name="idDest_route" />
     </Key>
-    <Property Name="idDest_route" Type="int" Nullable="false" />
+    <Property Name="idDest_route" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idRoute" Type="int" Nullable="false" />
     <Property Name="idDestination" Type="int" Nullable="false" />
     <Property Name="timeArrive" Type="time" Precision="7" />
@@ -96,7 +85,7 @@
     <Key>
       <PropertyRef Name="idDestination" />
     </Key>
-    <Property Name="idDestination" Type="int" Nullable="false" />
+    <Property Name="idDestination" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="town" Type="varchar" MaxLength="255" />
     <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
@@ -123,7 +112,7 @@
     <Property Name="workerCode" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="login" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
-    <Property Name="surname" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="surname" Type="nvarchar(max)" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="patronymic" Type="varchar" MaxLength="255" />
     <Property Name="phoneNumber" Type="varchar" MaxLength="20" />
@@ -135,7 +124,7 @@
     <Key>
       <PropertyRef Name="idDriver_list" />
     </Key>
-    <Property Name="idDriver_list" Type="int" Nullable="false" />
+    <Property Name="idDriver_list" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idDriver" Type="int" Nullable="false" />
     <Property Name="idOrder_list" Type="int" Nullable="false" />
   </EntityType>
@@ -143,7 +132,7 @@
     <Key>
       <PropertyRef Name="idOrder" />
     </Key>
-    <Property Name="idOrder" Type="int" Nullable="false" />
+    <Property Name="idOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="date" Type="datetime" />
     <Property Name="cost" Type="int" />
     <Property Name="adress" Type="varchar" MaxLength="255" />
@@ -153,7 +142,7 @@
     <Key>
       <PropertyRef Name="idOrder_item" />
     </Key>
-    <Property Name="idOrder_item" Type="int" Nullable="false" />
+    <Property Name="idOrder_item" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idOrder" Type="int" Nullable="false" />
     <Property Name="idService" Type="int" Nullable="false" />
   </EntityType>
@@ -161,7 +150,7 @@
     <Key>
       <PropertyRef Name="idQualification" />
     </Key>
-    <Property Name="idQualification" Type="int" Nullable="false" />
+    <Property Name="idQualification" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="rang" Type="int" />
   </EntityType>
@@ -169,15 +158,14 @@
     <Key>
       <PropertyRef Name="idRoute" />
     </Key>
-    <Property Name="idRoute" Type="int" Nullable="false" />
+    <Property Name="idRoute" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="text" Nullable="false" />
-    <Property Name="timeStart" Type="time" Precision="7" />
   </EntityType>
   <EntityType Name="seat">
     <Key>
       <PropertyRef Name="idSeat" />
     </Key>
-    <Property Name="idSeat" Type="int" Nullable="false" />
+    <Property Name="idSeat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idBus" Type="int" Nullable="false" />
     <Property Name="row" Type="int" />
     <Property Name="number" Type="int" />
@@ -187,7 +175,7 @@
     <Key>
       <PropertyRef Name="idService" />
     </Key>
-    <Property Name="idService" Type="int" Nullable="false" />
+    <Property Name="idService" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="255" />
     <Property Name="cost" Type="int" />
   </EntityType>
@@ -195,15 +183,28 @@
     <Key>
       <PropertyRef Name="idService_car_type" />
     </Key>
-    <Property Name="idService_car_type" Type="int" Nullable="false" />
+    <Property Name="idService_car_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idService" Type="int" Nullable="false" />
     <Property Name="idCarType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="setupped_route">
+    <Key>
+      <PropertyRef Name="idSetupped_route" />
+    </Key>
+    <Property Name="idSetupped_route" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idRoute" Type="int" Nullable="false" />
+    <Property Name="idBus" Type="int" Nullable="false" />
+    <Property Name="dateStart" Type="datetime" Nullable="false" />
+    <Property Name="dateEnd" Type="datetime" Nullable="false" />
+    <Property Name="idFirstDriver" Type="int" Nullable="false" />
+    <Property Name="idSecondDriver" Type="int" />
+    <Property Name="idConductor" Type="int" />
   </EntityType>
   <EntityType Name="ticket">
     <Key>
       <PropertyRef Name="idTticket" />
     </Key>
-    <Property Name="idTticket" Type="int" Nullable="false" />
+    <Property Name="idTticket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idBus" Type="int" Nullable="false" />
     <Property Name="idSeat" Type="int" Nullable="false" />
     <Property Name="idCustomer" Type="int" Nullable="false" />
@@ -213,38 +214,38 @@
     <Property Name="startDest" Type="int" Nullable="false" />
     <Property Name="finalDest" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="bus_selected_conductor-driver">
+  <Association Name="bus_selected_conductor-driver_fk">
     <End Role="driver" Type="Self.driver" Multiplicity="0..1" />
-    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <End Role="setupped_route" Type="Self.setupped_route" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="driver">
         <PropertyRef Name="idDriver" />
       </Principal>
-      <Dependent Role="bus_selected">
+      <Dependent Role="setupped_route">
         <PropertyRef Name="idConductor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="bus_selected_firstDriver-driver_fk">
     <End Role="driver" Type="Self.driver" Multiplicity="1" />
-    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <End Role="setupped_route" Type="Self.setupped_route" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="driver">
         <PropertyRef Name="idDriver" />
       </Principal>
-      <Dependent Role="bus_selected">
+      <Dependent Role="setupped_route">
         <PropertyRef Name="idFirstDriver" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="bus_selected_secondDriver-driver_fk">
     <End Role="driver" Type="Self.driver" Multiplicity="0..1" />
-    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <End Role="setupped_route" Type="Self.setupped_route" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="driver">
         <PropertyRef Name="idDriver" />
       </Principal>
-      <Dependent Role="bus_selected">
+      <Dependent Role="setupped_route">
         <PropertyRef Name="idSecondDriver" />
       </Dependent>
     </ReferentialConstraint>
@@ -253,24 +254,24 @@
     <End Role="bus" Type="Self.bus" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <End Role="setupped_route" Type="Self.setupped_route" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="bus">
         <PropertyRef Name="idBus" />
       </Principal>
-      <Dependent Role="bus_selected">
+      <Dependent Role="setupped_route">
         <PropertyRef Name="idBus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="bus_selected-route_FK">
     <End Role="route" Type="Self.route" Multiplicity="1" />
-    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="*" />
+    <End Role="setupped_route" Type="Self.setupped_route" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="route">
         <PropertyRef Name="idRoute" />
       </Principal>
-      <Dependent Role="bus_selected">
+      <Dependent Role="setupped_route">
         <PropertyRef Name="idRoute" />
       </Dependent>
     </ReferentialConstraint>
@@ -515,18 +516,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ticket-bus_fk">
-    <End Role="bus_selected" Type="Self.bus_selected" Multiplicity="1" />
-    <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="bus_selected">
-        <PropertyRef Name="idBus_selected" />
-      </Principal>
-      <Dependent Role="ticket">
-        <PropertyRef Name="idBus" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ticket-customer_fk">
     <End Role="customer" Type="Self.customer" Multiplicity="1" />
     <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
@@ -566,7 +555,6 @@
   <EntityContainer Name="Хранилище AutoCompanyDBModelContainer">
     <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="bus" EntityType="Self.bus" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="bus_selected" EntityType="Self.bus_selected" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="car" EntityType="Self.car" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="car_list" EntityType="Self.car_list" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="car_type" EntityType="Self.car_type" Schema="dbo" store:Type="Tables" />
@@ -584,26 +572,27 @@
     <EntitySet Name="seat" EntityType="Self.seat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="service" EntityType="Self.service" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="service_car_type" EntityType="Self.service_car_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="setupped_route" EntityType="Self.setupped_route" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ticket" EntityType="Self.ticket" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="bus_selected_conductor-driver" Association="Self.bus_selected_conductor-driver">
+    <AssociationSet Name="bus_selected_conductor-driver_fk" Association="Self.bus_selected_conductor-driver_fk">
       <End Role="driver" EntitySet="driver" />
-      <End Role="bus_selected" EntitySet="bus_selected" />
+      <End Role="setupped_route" EntitySet="setupped_route" />
     </AssociationSet>
     <AssociationSet Name="bus_selected_firstDriver-driver_fk" Association="Self.bus_selected_firstDriver-driver_fk">
       <End Role="driver" EntitySet="driver" />
-      <End Role="bus_selected" EntitySet="bus_selected" />
+      <End Role="setupped_route" EntitySet="setupped_route" />
     </AssociationSet>
     <AssociationSet Name="bus_selected_secondDriver-driver_fk" Association="Self.bus_selected_secondDriver-driver_fk">
       <End Role="driver" EntitySet="driver" />
-      <End Role="bus_selected" EntitySet="bus_selected" />
+      <End Role="setupped_route" EntitySet="setupped_route" />
     </AssociationSet>
     <AssociationSet Name="bus_selected-bus_fk" Association="Self.bus_selected-bus_fk">
       <End Role="bus" EntitySet="bus" />
-      <End Role="bus_selected" EntitySet="bus_selected" />
+      <End Role="setupped_route" EntitySet="setupped_route" />
     </AssociationSet>
     <AssociationSet Name="bus_selected-route_FK" Association="Self.bus_selected-route_FK">
       <End Role="route" EntitySet="route" />
-      <End Role="bus_selected" EntitySet="bus_selected" />
+      <End Role="setupped_route" EntitySet="setupped_route" />
     </AssociationSet>
     <AssociationSet Name="car_list-order_list_fk" Association="Self.car_list-order_list_fk">
       <End Role="order_list" EntitySet="order_list" />
@@ -679,10 +668,6 @@
     </AssociationSet>
     <AssociationSet Name="ticket_start-destination" Association="Self.ticket_start-destination">
       <End Role="destination" EntitySet="destination" />
-      <End Role="ticket" EntitySet="ticket" />
-    </AssociationSet>
-    <AssociationSet Name="ticket-bus_fk" Association="Self.ticket-bus_fk">
-      <End Role="bus_selected" EntitySet="bus_selected" />
       <End Role="ticket" EntitySet="ticket" />
     </AssociationSet>
     <AssociationSet Name="ticket-customer_fk" Association="Self.ticket-customer_fk">

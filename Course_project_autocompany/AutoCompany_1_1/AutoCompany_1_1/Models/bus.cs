@@ -17,8 +17,8 @@ namespace AutoCompany_1_1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public bus()
         {
-            this.bus_selected = new HashSet<bus_selected>();
             this.seat = new HashSet<seat>();
+            this.setupped_route = new HashSet<setupped_route>();
         }
     
         public int idBus { get; set; }
@@ -28,8 +28,8 @@ namespace AutoCompany_1_1.Models
         public string regNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bus_selected> bus_selected { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<seat> seat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<setupped_route> setupped_route { get; set; }
     }
 }

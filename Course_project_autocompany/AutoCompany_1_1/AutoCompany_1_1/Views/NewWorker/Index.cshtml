@@ -2,46 +2,48 @@
 	ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-@using (Html.BeginForm("NewDriver", "NewWorker",FormMethod.Get))
-{
-	@Html.AntiForgeryToken()
+<div style=" display:-webkit-inline-box">
+	@using (Html.BeginForm("NewDriver", "NewWorker", FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
 
-	<div class="form-horizontal">
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" style="width:200px; height:150px; font-size:30px" value="Водитель" class="btn btn-default" />
+		<div class="form-horizontal" style="padding-right:15px">
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" style="width:250px; height:150px; font-size:24px" value="Водитель" class="btn btn-default" />
+				</div>
 			</div>
 		</div>
-	</div>
-}
+	}
 
-@using (Html.BeginForm("NewAdmin", "NewWorker"))
-{
-	@Html.AntiForgeryToken()
+	@using (Html.BeginForm("NewAdmin", "NewWorker", FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
 
-	<div class="form-horizontal">
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" style="width:200px; height:150px; font-size:30px" value="Администратор" class="btn btn-default" />
+		<div class="form-horizontal" style="padding-right:15px; padding-left:15px">
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="text">
+					<input type="submit" style="width:250px; height:150px; font-size:24px" value="Администратор" class="btn btn-default" />
+				</div>
 			</div>
 		</div>
-	</div>
-}
+	}
 
-@using (Html.BeginForm("NewDispatcher", "NewWorker"))
-{
-	@Html.AntiForgeryToken()
+	@using (Html.BeginForm("NewDispatcher", "NewWorker", FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
 
-	<div class="form-horizontal">
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" style="width:200px; height:150px; font-size:30px" value="Диспетчер" class="btn btn-default" />
+		<div class="form-horizontal" style="padding-left:15px">
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" style="width:250px; height:150px; font-size:24px; padding-left:15px" value="Диспетчер" class="btn btn-default" />
+				</div>
 			</div>
 		</div>
-	</div>
-}
+	}
+</div>
 
 
 

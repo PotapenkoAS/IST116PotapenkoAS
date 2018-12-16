@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AutoCompany_1_1.Models.Shedule>
+
+@{
+    ViewBag.Title = "Shedule";
+}
+
+<h2>Shedule</h2>
+
+
+<table class="table">
+    <tr>
+		<th>
+			Date
+		</th>
+		<th>
+			Time from
+		</th>
+		<th>
+			Time end
+		</th>
+		<th>
+			Route
+		</th>
+		<th>
+			Bus
+		</th>
+    </tr>
+
+@foreach (var item in Model) {
+	<tr>
+		<td>
+			@Html.DisplayFor(modelItem => item.Date)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.TimeFrom)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.TimeEnd)
+		</td>
+		<td>
+			@Html.ActionLink(item.Route.name, "Details", "Route", new { id = item.Route.idRoute }, "")
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.Bus.name)
+		</td>
+	</tr>
+}
+
+</table>

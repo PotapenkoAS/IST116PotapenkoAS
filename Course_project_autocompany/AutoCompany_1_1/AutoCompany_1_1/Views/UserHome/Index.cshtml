@@ -1,5 +1,5 @@
 ﻿@model AutoCompany_1_1.Models.User
-
+<meta charset="utf-8">
 @{
 	ViewBag.Title = "Index";
 }
@@ -9,7 +9,6 @@
 	<h2>@user.getRole()</h2><hr />
 	<script>
 		function revert() {
-
 			if ($("#login,#name,#surname,#patronymic,#phoneNumber").attr('readonly') === 'true' || $("#login").attr('readonly') === 'readonly') {
 				$("#login,#name,#surname,#patronymic,#phoneNumber").removeAttr('readonly')
 				$("#saveBtn").attr('style', 'display:block')
@@ -17,12 +16,13 @@
 			} else {
 				$("#login,#name,#surname,#patronymic,#phoneNumber").attr('readonly', 'true')
 				$("#saveBtn").attr('style', 'display:none')
+				
 			}
 		}
 	</script>
-	
+
 	<input type="button" value="Редактировать" onclick="revert()" />
-	using (Html.BeginForm("Index","UserHome"))
+	using (Html.BeginForm("Index", "UserHome"))
 	{
 		<div class="col-md-offset-2 col-md-10">
 			@Html.EditorFor(model => model.login, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "login" } })
@@ -45,6 +45,13 @@
 		<div class="col-md-offset-2 col-md-10">
 			@Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "phoneNumber" } })
 		</div>
+
+		if ((Session["User"] as AutoCompany_1_1.Models.User).getRole() == "driver")
+		{
+			<div class="col-md-offset-2 col-md-10">
+				@Html.EditorFor(model => (model as AutoCompany_1_1.Models.driver).qualification.name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", id = "qualification" } })
+			</div>
+		}
 		<div class="col-md-offset-2 col-md-10 form-group" id="saveBtn" style="display:none">
 			<input type="submit" value="save" class="btn btn-default" />
 		</div>
@@ -57,6 +64,7 @@
 			<input type="submit" value="log out" class="btn btn-default" />
 		</div>
 	}
+	@Html.ActionLink("Shedule", "Shedule")
 }
 else
 {

@@ -8,62 +8,21 @@ namespace AutoCompany_1_1.Controllers
 {
     public class NewWorkerController : Controller
     {
-        // GET: NewWorker
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Index(Models.User user)
-        {
-            string role = user.getRole();
-            if (user.Validation() == null)
-            {
-                using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
-                {
-                    switch (role)
-                    {
-                        case "admin":
-                            {
-                                ent.admin.Add(Models.admin.Convert(user));
-                                ent.SaveChanges();
-                                break;
-                            }
-                        case "driver":
-                            {
-                                ent.driver.Add(Models.driver.Convert(user));
-                                ent.SaveChanges();
-                                break;
-                            }
-                        case "dispatcher":
-                            {
-                                ent.dispatcher.Add(Models.dispatcher.Convert(user));
-                                ent.SaveChanges();
-                                break;
-                            }
-                        default:
-                            break;
-                    }
-                }
-                ViewData["ResultMessage"] = "Success!";
-                return View();
-            }
-            else
-            {
-                ViewData["ResultMessage"] = "Fail :c";
-                return View();
-            }
-        }
 
         [HttpGet]
         public ActionResult NewDriver()
         {
+            Models.driver driver = new Models.driver();
+            driver.workerCode = Models.User.GenerateCode("driver");
             using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
             {
                 List<Models.qualification> list = (from a in ent.qualification select a).ToList();
                 ViewData["idQualification"] = new List<SelectListItem>();
-                ViewData["Code"] = Models.User.generateCode("driver");
                 foreach (Models.qualification el in list)
                 {
                     SelectListItem item = new SelectListItem();
@@ -72,27 +31,115 @@ namespace AutoCompany_1_1.Controllers
                     (ViewData["idQualification"] as List<SelectListItem>).Add(item);
                 }
             }
-            return View();
+            return View(driver);
         }
 
         [HttpPost]
         public ActionResult NewDriver(Models.driver driver)
         {
-            using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
+            if (driver.Validation() == null)
             {
-                List<Models.qualification> list = (from a in ent.qualification select a).ToList();
-                ViewData["idQualification"] = new List<SelectListItem>();
-                ViewData["Code"] = Models.User.generateCode("driver");
-                foreach (Models.qualification el in list)
+                if (Models.User.Find(driver.login) == null)
                 {
-                    SelectListItem item = new SelectListItem();
-                    item.Value = el.idQualification.ToString();
-                    item.Text = el.name;
-                    (ViewData["idQualification"] as List<SelectListItem>).Add(item);
+                    using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
+                    {
+                        ent.driver.Add(driver);
+                        ent.SaveChanges();
+                        return RedirectToAction("..");
+
+                    }
+                }
+                else
+                {
+                    ViewData["ErrorMessage"] = "Пользователь с таким именем уже существует";
+                    return View(driver);
                 }
             }
-            return View();
-            return RedirectToAction("NewDriver");
+            else
+            {
+                using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
+                {
+                    List<Models.qualification> list = (from a in ent.qualification select a).ToList();
+                    ViewData["idQualification"] = new List<SelectListItem>();
+                    foreach (Models.qualification el in list)
+                    {
+                        SelectListItem item = new SelectListItem();
+                        item.Value = el.idQualification.ToString();
+                        item.Text = el.name;
+                        (ViewData["idQualification"] as List<SelectListItem>).Add(item);
+                    }
+                }
+                return View(driver);
+            }
+        }
+        [HttpGet]
+        public ActionResult NewAdmin()
+        {
+            Models.admin admin = new Models.admin();
+            admin.workerCode = Models.User.GenerateCode("admin");
+            return View(admin);
+        }
+
+        [HttpPost]
+        public ActionResult NewAdmin(Models.admin admin)
+        {
+
+            if (admin.Validation() == null)
+            {
+                if (Models.User.Find(admin.login) == null)
+                {
+                    using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
+                    {
+                        ent.admin.Add(admin);
+                        ent.SaveChanges();
+                        return RedirectToAction("..");
+                    }
+                }
+                else
+                {
+
+                    ViewData["ErrorMessage"] = "Пользователь с таким именем уже существует";
+                    return View(admin);
+                }
+            }
+            else
+            {
+                return View(admin);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult NewDispatcher()
+        {
+            Models.dispatcher dispatcher = new Models.dispatcher();
+            dispatcher.workerCode = Models.User.GenerateCode("dispatcher");
+            return View(dispatcher);
+        }
+
+        [HttpPost]
+        public ActionResult NewDispatcher(Models.dispatcher dispatcher)
+        {
+            if (dispatcher.Validation() == null)
+            {
+                if (Models.User.Find(dispatcher.login) == null)
+                {
+                    using (Models.AutoCompanyDBEntities ent = new Models.AutoCompanyDBEntities())
+                    {
+                        ent.dispatcher.Add(dispatcher);
+                        ent.SaveChanges();
+                        return RedirectToAction("..");
+                    }
+                }
+                else
+                {
+                    ViewData["ErrorMessage"] = "Пользователь с таким именем уже существует";
+                    return View(dispatcher);
+                }
+            }
+            else
+            {
+                return View(dispatcher);
+            }
         }
     }
 }

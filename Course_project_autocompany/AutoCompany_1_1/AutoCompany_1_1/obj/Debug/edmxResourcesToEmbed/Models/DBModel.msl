@@ -28,19 +28,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="bus_selected">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.bus_selected">
-        <MappingFragment StoreEntitySet="bus_selected">
-          <ScalarProperty Name="idBus_selected" ColumnName="idBus_selected" />
-          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
-          <ScalarProperty Name="idBus" ColumnName="idBus" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="idFirstDriver" ColumnName="idFirstDriver" />
-          <ScalarProperty Name="idSecondDriver" ColumnName="idSecondDriver" />
-          <ScalarProperty Name="idConductor" ColumnName="idConductor" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="car">
       <EntityTypeMapping TypeName="AutoCompanyDBModel.car">
         <MappingFragment StoreEntitySet="car">
@@ -81,6 +68,7 @@
     <EntitySetMapping Name="customer">
       <EntityTypeMapping TypeName="AutoCompanyDBModel.customer">
         <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="workerCode" ColumnName="workerCode" />
           <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
           <ScalarProperty Name="patronymic" ColumnName="patronymic" />
           <ScalarProperty Name="surname" ColumnName="surname" />
@@ -187,7 +175,6 @@
         <MappingFragment StoreEntitySet="route">
           <ScalarProperty Name="idRoute" ColumnName="idRoute" />
           <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="timeStart" ColumnName="timeStart" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -232,6 +219,20 @@
           <ScalarProperty Name="cost" ColumnName="cost" />
           <ScalarProperty Name="startDest" ColumnName="startDest" />
           <ScalarProperty Name="finalDest" ColumnName="finalDest" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="setupped_route">
+      <EntityTypeMapping TypeName="AutoCompanyDBModel.setupped_route">
+        <MappingFragment StoreEntitySet="setupped_route">
+          <ScalarProperty Name="idConductor" ColumnName="idConductor" />
+          <ScalarProperty Name="idSecondDriver" ColumnName="idSecondDriver" />
+          <ScalarProperty Name="idFirstDriver" ColumnName="idFirstDriver" />
+          <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
+          <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+          <ScalarProperty Name="idBus" ColumnName="idBus" />
+          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
+          <ScalarProperty Name="idSetupped_route" ColumnName="idSetupped_route" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

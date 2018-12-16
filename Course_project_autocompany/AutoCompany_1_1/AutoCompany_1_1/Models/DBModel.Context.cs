@@ -27,7 +27,6 @@ namespace AutoCompany_1_1.Models
     
         public virtual DbSet<admin> admin { get; set; }
         public virtual DbSet<bus> bus { get; set; }
-        public virtual DbSet<bus_selected> bus_selected { get; set; }
         public virtual DbSet<car> car { get; set; }
         public virtual DbSet<car_list> car_list { get; set; }
         public virtual DbSet<car_type> car_type { get; set; }
@@ -46,5 +45,6 @@ namespace AutoCompany_1_1.Models
         public virtual DbSet<service> service { get; set; }
         public virtual DbSet<service_car_type> service_car_type { get; set; }
         public virtual DbSet<ticket> ticket { get; set; }
+        public virtual DbSet<setupped_route> setupped_route { get; set; }
     }
 }

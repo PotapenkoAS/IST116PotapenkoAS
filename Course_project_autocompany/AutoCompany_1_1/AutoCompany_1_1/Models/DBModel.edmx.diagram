@@ -4,10 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0aae0cf4720c4919803dd50b7ed0e54c" Name="Diagram1" ZoomLevel="100">
+      <Diagram DiagramId="0aae0cf4720c4919803dd50b7ed0e54c" Name="Diagram1" ZoomLevel="101">
         <EntityTypeShape EntityType="AutoCompanyDBModel.admin" Width="1.5" PointX="7.875" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AutoCompanyDBModel.bus" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoCompanyDBModel.bus_selected" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AutoCompanyDBModel.car" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AutoCompanyDBModel.car_list" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AutoCompanyDBModel.car_type" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
@@ -26,13 +25,7 @@
         <EntityTypeShape EntityType="AutoCompanyDBModel.service" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AutoCompanyDBModel.service_car_type" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AutoCompanyDBModel.ticket" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
-        <AssociationConnector Association="AutoCompanyDBModel.bus_selected_bus_fk" ManuallyRouted="false" />
         <AssociationConnector Association="AutoCompanyDBModel.seat_bus_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="AutoCompanyDBModel.bus_selected_conductor_driver" ManuallyRouted="false" />
-        <AssociationConnector Association="AutoCompanyDBModel.bus_selected_firstDriver_driver_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="AutoCompanyDBModel.bus_selected_secondDriver_driver_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="AutoCompanyDBModel.bus_selected_route_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="AutoCompanyDBModel.ticket_bus_fk" ManuallyRouted="false" />
         <AssociationConnector Association="AutoCompanyDBModel.car_cartype_fk" ManuallyRouted="false" />
         <AssociationConnector Association="AutoCompanyDBModel.list_car" ManuallyRouted="false" />
         <AssociationConnector Association="AutoCompanyDBModel.car_list_order_list_fk" ManuallyRouted="false" />
@@ -54,6 +47,12 @@
         <AssociationConnector Association="AutoCompanyDBModel.ticket_route_fk" ManuallyRouted="false" />
         <AssociationConnector Association="AutoCompanyDBModel.ticket_seat_fk" ManuallyRouted="false" />
         <AssociationConnector Association="AutoCompanyDBModel.service_car_service_fk" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AutoCompanyDBModel.setupped_route" Width="1.5" PointX="5.25" PointY="11.5" />
+        <AssociationConnector Association="AutoCompanyDBModel.setupped_route_bus_fk1" />
+        <AssociationConnector Association="AutoCompanyDBModel.setupped_route_conductor_driver_fk" />
+        <AssociationConnector Association="AutoCompanyDBModel.setupped_route_firstDriver_driver_fk1" />
+        <AssociationConnector Association="AutoCompanyDBModel.setupped_route_secondDriver_driver_fk1" />
+        <AssociationConnector Association="AutoCompanyDBModel.setupped_route_route_FK1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

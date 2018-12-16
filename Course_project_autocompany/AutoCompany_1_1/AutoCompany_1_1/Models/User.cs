@@ -27,6 +27,7 @@ namespace AutoCompany_1_1.Models
         public string phoneNumber { get; set; }
         public string workerCode { get; set; }
 
+        
         public string getRole()
         {
             Regex driverReg = new Regex(@"^\d");
@@ -56,13 +57,13 @@ namespace AutoCompany_1_1.Models
         public List<string> Validation()
         {
             List<string> errors = new List<string>();
-            if (login == null || login.Length < 3 || login.Length > 30)
+            if (login == null || login.Length < 4 || login.Length > 30)
             {
                 errors.Add("Неверный логин");
             }
-            if (password == null || password.Length < 3 || password.Length > 30)
+            if (password == null || password.Length < 4 || password.Length > 30)
             {
-                errors.Add("Неверный логин");
+                errors.Add("Неверный пароль");
             }
             if (name == null)
             {
@@ -176,38 +177,52 @@ namespace AutoCompany_1_1.Models
             }
         }
 
-        public static string generateCode(string role)
+        public static string GenerateCode(string role)
         {
             Regex adminReg = new Regex(@"^[\.\$\^\{\[\(\|\)\*\+\?\\]");//  .$^{](|)]}?\     (|) 33-125 i
             string code;
             string syms = @".$^{](|)]}?\";
             Random rnd = new Random();
-
-            switch (role)
+            using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
             {
-                case "admin":
-                    code = syms[rnd.Next(syms.Length)].ToString();
-                    for (int i = 0; i < 6; i++)
-                    {
-                        code += Convert.ToChar(rnd.Next(33, 126)).ToString();
-                    }
-                    break;
-                case "driver":
-                    code = rnd.Next(10).ToString();
-                    for (int i = 0; i < 6; i++)
-                    {
-                        code += Convert.ToChar(rnd.Next(33, 126)).ToString();
-                    }
-                    break;
-                case "dispatcher":
-                    code = rnd.Next(97, 123).ToString();
-                    for (int i = 0; i < 6; i++)
-                    {
-                        code += Convert.ToChar(rnd.Next(33, 126)).ToString();
-                    }
-                    break;
-                default:
-                    return null;
+                switch (role)
+                {
+                    case "admin":
+                        List<string> adminCodes = (from a in ent.admin select a.workerCode).ToList();
+                        do
+                        {
+                            code = syms[rnd.Next(syms.Length)].ToString();
+                            for (int i = 0; i < 6; i++)
+                            {
+                                code += Convert.ToChar(rnd.Next(33, 126)).ToString();
+                            }
+                        } while (adminCodes.Contains(code));
+                        break;
+                    case "driver":
+                        List<string> driverCodes = (from a in ent.driver select a.workerCode).ToList();
+                        do
+                        {
+                            code = rnd.Next(10).ToString();
+                            for (int i = 0; i < 6; i++)
+                            {
+                                code += Convert.ToChar(rnd.Next(33, 126)).ToString();
+                            }
+                        } while (driverCodes.Contains(code));
+                        break;
+                    case "dispatcher":
+                        List<string> dispatherCodes = (from a in ent.admin select a.workerCode).ToList();
+                        do
+                        {
+                            code = Convert.ToChar(rnd.Next(97, 123)).ToString();
+                            for (int i = 0; i < 6; i++)
+                            {
+                                code += Convert.ToChar(rnd.Next(33, 126)).ToString();
+                            }
+                        } while (dispatherCodes.Contains(code));
+                        break;
+                    default:
+                        return null;
+                }
             }
             return code;
         }

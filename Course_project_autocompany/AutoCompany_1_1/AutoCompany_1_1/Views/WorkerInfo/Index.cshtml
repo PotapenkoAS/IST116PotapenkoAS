@@ -1,0 +1,100 @@
+﻿@model AutoCompany_1_1.Models.driver
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+	<h4>driver</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		@if (Session["User"] != null && (Session["User"] as AutoCompany_1_1.Models.User).getRole() == "admin")
+		{
+			<dt>
+				@Html.DisplayNameFor(model => model.workerCode)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.workerCode)
+			</dd>
+		}
+		<dt>
+			@Html.DisplayNameFor(model => model.login)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.login)
+		</dd>
+		@if (Session["User"] != null && (Session["User"] as AutoCompany_1_1.Models.User).getRole() == "admin")
+		{
+			<dt>
+				@Html.DisplayNameFor(model => model.password)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.password)
+			</dd>
+		}
+		<dt>
+			@Html.DisplayNameFor(model => model.surname)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.surname)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.name)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.patronymic)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.patronymic)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.phoneNumber)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.phoneNumber)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.experience)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.experience)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.salary)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.salary)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.qualification.name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.qualification.name)
+		</dd>
+
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Back to List", "Index","SetupDriver")
+</p>

@@ -13,7 +13,6 @@ namespace AutoCompany_1_1.Models
 
         public static IEnumerable<admin> GetAdmins()
         {
-            
             return from a in ent.admin select a;
         }
     }

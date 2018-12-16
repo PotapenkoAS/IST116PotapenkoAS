@@ -25,7 +25,7 @@ namespace AutoCompany_1_1.Controllers
                     ViewData["ErrorMessage"] = "Неверное имя или пароль";
                     return View();
                 }
-                else if (user.login != null)
+                else
                 {
                     if (user.workerCode == null)
                     {

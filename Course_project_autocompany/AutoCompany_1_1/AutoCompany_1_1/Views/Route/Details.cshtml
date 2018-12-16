@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AutoCompany_1_1.Models.dest_route>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+	<tr>
+		<th>
+			Town
+		</th>
+		<th>
+			Name
+		</th>
+		<th>
+			Time arrive
+		</th>
+		<th>
+			Time out
+		</th>
+
+	</tr>
+
+@foreach (var item in Model) {
+	<tr>
+		<td>
+			@Html.DisplayFor(modelItem => item.destination.town)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.destination.name)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.timeArrive)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.timeOut)
+		</td>
+	</tr>
+}
+
+</table>

@@ -24,7 +24,6 @@ namespace AutoCompany_1_1.Models
         public int startDest { get; set; }
         public int finalDest { get; set; }
     
-        public virtual bus_selected bus_selected { get; set; }
         public virtual customer customer { get; set; }
         public virtual destination destination { get; set; }
         public virtual destination destination1 { get; set; }

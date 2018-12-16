@@ -17,20 +17,19 @@ namespace AutoCompany_1_1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public route()
         {
-            this.bus_selected = new HashSet<bus_selected>();
             this.dest_route = new HashSet<dest_route>();
             this.ticket = new HashSet<ticket>();
+            this.setupped_route = new HashSet<setupped_route>();
         }
     
         public int idRoute { get; set; }
         public string name { get; set; }
-        public Nullable<System.TimeSpan> timeStart { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bus_selected> bus_selected { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dest_route> dest_route { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ticket> ticket { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<setupped_route> setupped_route { get; set; }
     }
 }
