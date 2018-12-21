@@ -1,0 +1,82 @@
+﻿@model AutoCompany_1_1.Models.setupped_route
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>setupped_route</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bus.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bus.name)
+        </dd>
+
+        <dt>
+           first driver surname
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstDriver.surname)
+        </dd>
+
+        <dt>
+            second driver surname
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.secondDriver.surname)
+        </dd>
+
+        <dt>
+            conductor surname
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.conductor.surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.route.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.route.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idSetupped_route }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

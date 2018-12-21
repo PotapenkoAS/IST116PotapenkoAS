@@ -17,8 +17,6 @@ namespace AutoCompany_1_1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public qualification()
         {
-            this.car_type = new HashSet<car_type>();
-            this.car_type_qual = new HashSet<car_type_qual>();
             this.driver = new HashSet<driver>();
         }
     
@@ -26,10 +24,6 @@ namespace AutoCompany_1_1.Models
         public string name { get; set; }
         public Nullable<int> rang { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<car_type> car_type { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<car_type_qual> car_type_qual { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<driver> driver { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -101,25 +102,42 @@ namespace AutoCompany_1_1.Controllers
         private bool IsFree(driver dr)
         {
             var sr = Session["sr"] as setupped_route;
-            bool flag = false;
-            bool tmp = true;
+            bool flag = true;
             TimeSpan srSpan = sr.dateEnd - sr.dateStart;
             List<Shedule> slist = dr.GetShedules();
 
+            if (slist.Count == 1)
+            {
+                if (sr.dateStart > slist.ElementAt(0).DateEnd || sr.dateEnd < slist.ElementAt(0).DateStart)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
             for (int i = 0; i < slist.Count - 1; i++)
             {
-                tmp = false;
+
+
                 if (sr.dateStart > slist.ElementAt(i).DateEnd && sr.dateEnd < slist.ElementAt(i + 1).DateStart)
                 {
+                    flag = false;
                     TimeSpan shSpan = slist.ElementAt(i + 1).DateStart - slist.ElementAt(i).DateEnd;
                     if (shSpan.Hours < srSpan.Hours)
                     {
-                        flag = true;
+                        return true;
                     }
                 }
+                else if (sr.dateStart < slist.ElementAt(i).DateEnd && sr.dateEnd > slist.ElementAt(i + 1).DateStart)
+                {
+                    return false;
+                }
+
 
             }
-            return flag || tmp;
+            return flag;
         }
 
         [HttpGet]
@@ -129,20 +147,22 @@ namespace AutoCompany_1_1.Controllers
             {
 
                 DateTime date = DateTime.Now.Date;
+                ViewData["date"] = date.Year + "-" + date.Month + "-" + date.Day;
                 List<setupped_route> list = ent.setupped_route
-                .Include("bus")
-                .Include("route")
-                .Include("firstDriver")
-                .Include("secondDriver")
-                .Include("conductor")
-                .Where(a => a.dateStart >= date)
-                .ToList();
+               .Include("bus")
+               .Include("route")
+               .Include("firstDriver")
+               .Include("secondDriver")
+               .Include("conductor")
+               .Where(a => DbFunctions.TruncateTime(a.dateStart) <= date.Date && DbFunctions.TruncateTime(a.dateEnd) >= date.Date)
+               .OrderBy(a => a.dateStart)
+               .ToList();
                 return View(list);
             }
         }
 
         [HttpPost]
-        public ActionResult Index(DateTime? date)
+        public ActionResult Index(DateTime date)
         {
             using (AutoCompanyDBEntities ent = new AutoCompanyDBEntities())
             {
@@ -150,14 +170,14 @@ namespace AutoCompany_1_1.Controllers
                 {
                     date = DateTime.Now.Date;
                 }
-
+                ViewData["date"] = date.Year + "-" + date.Month + "-" + date.Day;
                 List<setupped_route> list = ent.setupped_route
                 .Include("bus")
                 .Include("route")
                 .Include("firstDriver")
                 .Include("secondDriver")
                 .Include("conductor")
-                .Where(a => a.dateStart >= date && a.dateEnd <= date)
+                .Where(a => DbFunctions.TruncateTime(a.dateStart) <= date.Date && DbFunctions.TruncateTime(a.dateEnd) >= date.Date)
                 .OrderBy(a => a.dateStart)
                 .ToList();
                 return View(list);
@@ -168,6 +188,8 @@ namespace AutoCompany_1_1.Controllers
         public ActionResult Create()
         {
             GenLists(null);
+            DateTime date = DateTime.Now.Date;
+            ViewData["date"] = date.Year + "-" + date.Month + "-" + date.Day;
             return View();
 
         }
@@ -209,10 +231,9 @@ namespace AutoCompany_1_1.Controllers
                     }
                 }
 
-                List<driver> driverlist2 = ent.Database.SqlQuery<driver>(query, new object[1] { "bus driver" }).ToList();
+
                 ViewData["idSecondDriver"] = new List<SelectListItem>();
-                (ViewData["idSecondDriver"] as List<SelectListItem>).Add(new SelectListItem() { Value = null, Text = "" });
-                foreach (driver el in driverlist2)
+                foreach (driver el in driverlist1)
                 {
                     if (IsFree(el))
                     {
@@ -224,10 +245,10 @@ namespace AutoCompany_1_1.Controllers
                         (ViewData["idSecondDriver"] as List<SelectListItem>).Add(item);
                     }
                 }
+                (ViewData["idSecondDriver"] as List<SelectListItem>).Add(new SelectListItem() { Value = null, Text = null });
 
                 List<driver> conductorList = ent.Database.SqlQuery<driver>(query, new object[1] { "conductor" }).ToList();
                 ViewData["idConductor"] = new List<SelectListItem>();
-                (ViewData["idConductor"] as List<SelectListItem>).Add(new SelectListItem() { Value = null, Text = "" });
                 foreach (driver el in conductorList)
                 {
                     if (IsFree(el))
@@ -240,18 +261,24 @@ namespace AutoCompany_1_1.Controllers
                         (ViewData["idConductor"] as List<SelectListItem>).Add(item);
                     }
                 }
+                 (ViewData["idConductor"] as List<SelectListItem>).Add(new SelectListItem() { Value = null, Text = null });
             }
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateSecondStep(int idFirstDriver, int? idSecondDriver, int? idConductor)
+        public ActionResult CreateSecondStep(int? idFirstDriver, int? idSecondDriver, int? idConductor)
         {
+            if (idFirstDriver == null)
+            {
+                ViewData["Errors"] = new List<string>() { "First driver have to be setupped" };
+                return View();
+            }
             using (var ent = new AutoCompanyDBEntities())
             {
                 var sr = Session["sr"] as setupped_route;
                 Session["sr"] = null;
-                sr.idFirstDriver = idFirstDriver;
+                sr.idFirstDriver = (int)idFirstDriver;
                 sr.idSecondDriver = idSecondDriver;
                 sr.idConductor = idConductor;
                 string query = "insert into setupped_route (idRoute,idBus,dateStart,dateEnd,idFirstDriver,idSecondDriver,idConductor) values(@P0,@P1,@P2,@P3,@P4,@P5,@P6)";
@@ -317,6 +344,48 @@ namespace AutoCompany_1_1.Controllers
                 return RedirectToAction("Index");
             }
         }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            using (var ent = new AutoCompanyDBEntities())
+            {
+                var sr = ent.setupped_route
+                     .Include("bus")
+                     .Include("route")
+                     .Include("firstDriver")
+                     .Include("secondDriver")
+                     .Include("conductor")
+                     .Where(s => s.idSetupped_route == id).FirstOrDefault();
+                return View(sr);
+            }
+        }
+        [HttpPost]
+        public ActionResult Delete(int? id)
+        {
+            using (var ent = new AutoCompanyDBEntities())
+            {
+                var sr = ent.setupped_route.Where(s => s.idSetupped_route == id).FirstOrDefault();
+                ent.setupped_route.Remove(sr);
+                ent.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            using (var ent = new AutoCompanyDBEntities())
+            {
+                var sr = ent.setupped_route
+                     .Include("bus")
+                     .Include("route")
+                     .Include("firstDriver")
+                     .Include("secondDriver")
+                     .Include("conductor")
+                     .Where(s => s.idSetupped_route == id).FirstOrDefault();
+                return View(sr);
+            }
+        }
     }
 }

@@ -12,11 +12,11 @@
 			if ($("#login,#name,#surname,#patronymic,#phoneNumber").attr('readonly') === 'true' || $("#login").attr('readonly') === 'readonly') {
 				$("#login,#name,#surname,#patronymic,#phoneNumber").removeAttr('readonly')
 				$("#saveBtn").attr('style', 'display:block')
-				
+
 			} else {
 				$("#login,#name,#surname,#patronymic,#phoneNumber").attr('readonly', 'true')
 				$("#saveBtn").attr('style', 'display:none')
-				
+
 			}
 		}
 	</script>
@@ -64,7 +64,10 @@
 			<input type="submit" value="log out" class="btn btn-default" />
 		</div>
 	}
-	@Html.ActionLink("Shedule", "Shedule")
+	if (Session["User"] != null && (Session["User"] as AutoCompany_1_1.Models.User).getRole() == "driver")
+	{
+		<p>@Html.ActionLink("Shedule", "Shedule")</p>
+	}
 }
 else
 {

@@ -10,13 +10,10 @@
 <table class="table">
     <tr>
 		<th>
-			Date
+			Date from
 		</th>
 		<th>
-			Time from
-		</th>
-		<th>
-			Time end
+			Date end
 		</th>
 		<th>
 			Route
@@ -29,13 +26,10 @@
 @foreach (var item in Model) {
 	<tr>
 		<td>
-			@Html.DisplayFor(modelItem => item.Date)
+			@Html.DisplayFor(modelItem => item.DateStart)
 		</td>
 		<td>
-			@Html.DisplayFor(modelItem => item.TimeFrom)
-		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.TimeEnd)
+			@Html.DisplayFor(modelItem => item.DateEnd)
 		</td>
 		<td>
 			@Html.ActionLink(item.Route.name, "Details", "Route", new { id = item.Route.idRoute }, "")

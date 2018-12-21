@@ -21,7 +21,7 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li>@Html.ActionLink("Главная","Index","Home")</li>
+					<li>@Html.ActionLink("Home Page","Index","Home")</li>
 					@{
 						AutoCompany_1_1.Models.User user = new AutoCompany_1_1.Models.User();
 						if (Session["user"] != null)
@@ -29,21 +29,22 @@
 							user = (AutoCompany_1_1.Models.User)Session["User"];
 							if (user.getRole() == "admin")
 							{
-								<li>@Html.ActionLink("Новый работник", "Index", "NewWorker")</li>
+								<li>@Html.ActionLink("New Worker", "Index", "NewWorker")</li>
 							}
 						}
 					}
-					<li>@Html.ActionLink("Setup driver","Index","SetupDriver")</li>
+					<li>@Html.ActionLink("Get Ticket","Index","Ticket")</li>
+					<li>@Html.ActionLink("Shedule","Index","SetupDriver")</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Session["User"] != null)
 					{
-						<li>@Html.ActionLink("Здарова, " + user.login, "Index", "UserHome")</li>
+						<li>@Html.ActionLink("Your Page", "Index", "UserHome")</li>
 					}
 					else
 					{
-						<li>@Html.ActionLink("Регистрация", "Index", "Registration")</li>
-						<li>@Html.ActionLink("Войти", "Index", "LogIn")</li>
+						<li>@Html.ActionLink("Register", "Index", "Registration")</li>
+						<li>@Html.ActionLink("Log In", "Index", "LogIn")</li>
 					}
 				</ul>
 			</div>
@@ -53,7 +54,7 @@
 		@RenderBody()
 		<hr />
 		<footer>
-			<p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
+			<p>&copy; @DateTime.Now.Year – ASP.NET application</p>
 		</footer>
 	</div>
 

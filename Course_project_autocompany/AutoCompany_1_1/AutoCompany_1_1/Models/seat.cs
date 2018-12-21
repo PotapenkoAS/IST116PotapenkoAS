@@ -25,6 +25,7 @@ namespace AutoCompany_1_1.Models
         public Nullable<int> row { get; set; }
         public Nullable<int> number { get; set; }
         public Nullable<int> column { get; set; }
+        public Nullable<byte> isBusy { get; set; }
     
         public virtual bus bus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

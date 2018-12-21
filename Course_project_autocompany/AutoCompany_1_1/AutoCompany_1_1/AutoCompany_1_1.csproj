@@ -152,14 +152,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\NewWorkerController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Controllers\SetupDriverController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\UserHomeController.cs" />
     <Compile Include="Controllers\WorkerInfoController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -168,24 +167,10 @@
     <Compile Include="Models\admin.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminDAO.cs" />
     <Compile Include="Models\bus.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\car.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CarDAO.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Models\car_list.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\car_type.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\car_type_qual.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\customer.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -219,16 +204,7 @@
     <Compile Include="Models\driver.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\driver_list.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\LoginPassword.cs" />
-    <Compile Include="Models\order.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\order_list.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\qualification.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -237,12 +213,6 @@
     </Compile>
     <Compile Include="Models\RouteDateTime.cs" />
     <Compile Include="Models\seat.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\service.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\service_car_type.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\setupped_route.cs">
@@ -323,9 +293,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Car\Index.cshtml" />
-    <Content Include="Views\Car\Create.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Views\UserHome\Index.cshtml" />
@@ -344,6 +311,12 @@
     <Content Include="Views\SetupDriver\Edit.cshtml" />
     <Content Include="Views\UserHome\Shedule.cshtml" />
     <Content Include="Views\SetupDriver\CreateSecondStep.cshtml" />
+    <Content Include="Views\Ticket\NewTicket.cshtml" />
+    <Content Include="Views\Ticket\TicketSecondStep.cshtml" />
+    <Content Include="Views\Ticket\Index.cshtml" />
+    <Content Include="Views\SetupDriver\Delete.cshtml" />
+    <Content Include="Views\SetupDriver\Details.cshtml" />
+    <Content Include="Views\Ticket\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,88 @@
+﻿@model AutoCompany_1_1.Models.setupped_route
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>setupped_route</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bus.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bus.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.firstDriver.surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstDriver.surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.secondDriver.surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.secondDriver.surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.conductor.surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.conductor.surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.route.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.route.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("Delete","SetupDriver",new { id=@Model.idSetupped_route},FormMethod.Post)) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default"  /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

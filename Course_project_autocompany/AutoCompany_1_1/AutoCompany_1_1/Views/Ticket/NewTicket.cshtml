@@ -1,0 +1,55 @@
+﻿@model AutoCompany_1_1.Models.ticket
+
+@{
+	ViewBag.Title = "NewTicket";
+}
+
+<h2>Index</h2>
+
+<body>
+	@if (Session["User"] == null)
+	{
+		<p style="color:red"> Register or log in first</p>
+	}
+	else
+	{
+		using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+
+			<div class="form-horizontal">
+				<h4>ticket</h4>
+				<hr />
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				<input type="date" class="form-control" name="date" id="date" value="@ViewData["date"]">
+				<div class="form-group">
+
+					<div class="col-md-10">
+						Start
+						@Html.DropDownList("startDest", null, htmlAttributes: new { @class = "form-control js-example-basic-single " })
+						@Html.ValidationMessageFor(model => model.startDest, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+
+					<div class="col-md-10">
+						Finish
+						@Html.DropDownList("finalDest", null, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.finalDest, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						<input type="submit" value="Create" class="btn btn-default" />
+					</div>
+				</div>
+			</div>
+		}
+	}
+</body>
+
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>

@@ -13,24 +13,28 @@ namespace AutoCompany_1_1.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class driver : User
+    public partial class driver:User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public driver()
         {
-            this.driver_list = new HashSet<driver_list>();
             this.setupped_route = new HashSet<setupped_route>();
             this.setupped_route1 = new HashSet<setupped_route>();
             this.setupped_route2 = new HashSet<setupped_route>();
         }
-
+    
         public int idDriver { get; set; }
-
         public Nullable<int> experience { get; set; }
         public Nullable<int> salary { get; set; }
         public int idQualification { get; set; }
-        public List<Shedule> Shedules { get; set; }
-
+    
+        public virtual qualification qualification { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<setupped_route> setupped_route { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<setupped_route> setupped_route1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<setupped_route> setupped_route2 { get; set; }
         public static driver Convert(User v)
         {
             var a = new driver();
@@ -54,7 +58,9 @@ namespace AutoCompany_1_1.Models
                     .Include("Route")
                     .Where(s => s.idFirstDriver == idDriver ||
                     s.idSecondDriver == idDriver ||
-                    s.idConductor == idDriver).ToList();
+                    s.idConductor == idDriver)
+                    .OrderBy(s => s.dateStart)
+                    .ToList();
                 List<Shedule> sh = new List<Shedule>();
                 foreach (setupped_route el in sr)
                 {
@@ -64,14 +70,6 @@ namespace AutoCompany_1_1.Models
 
             }
         }
-        public virtual qualification qualification { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<driver_list> driver_list { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<setupped_route> setupped_route { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<setupped_route> setupped_route1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<setupped_route> setupped_route2 { get; set; }
+
     }
 }

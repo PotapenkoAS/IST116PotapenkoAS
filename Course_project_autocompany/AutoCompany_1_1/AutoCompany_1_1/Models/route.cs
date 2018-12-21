@@ -18,7 +18,6 @@ namespace AutoCompany_1_1.Models
         public route()
         {
             this.dest_route = new HashSet<dest_route>();
-            this.ticket = new HashSet<ticket>();
             this.setupped_route = new HashSet<setupped_route>();
         }
     
@@ -27,8 +26,6 @@ namespace AutoCompany_1_1.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dest_route> dest_route { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ticket> ticket { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<setupped_route> setupped_route { get; set; }
     }

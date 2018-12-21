@@ -17,11 +17,13 @@ namespace AutoCompany_1_1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public customer()
         {
-            this.order = new HashSet<order>();
             this.ticket = new HashSet<ticket>();
         }
     
         public int idCustomer { get; set; }
+        
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ticket> ticket { get; set; }
 
         public static customer Convert(User v)
         {
@@ -35,9 +37,6 @@ namespace AutoCompany_1_1.Models
             a.workerCode = "";
             return a;
         }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<order> order { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ticket> ticket { get; set; }
+
     }
 }

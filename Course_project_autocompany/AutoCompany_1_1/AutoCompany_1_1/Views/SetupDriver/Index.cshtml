@@ -6,23 +6,19 @@
 
 <h2>Index</h2>
 
-<p>
-	@Html.ActionLink("Create New", "Create")
-</p>
-<script>
-	function setDate() {
-		var el = document.getElementById("date");
-		var now = @DateTime.Today.Year+"-" +@DateTime.Today.Month+"-" +@DateTime.Today.Day;
-		if (el.value == "") {
-			el.value = now;
-		}
-	}
-</script>
-<body onload="setDate()">
+@if (Session["User"] != null && (Session["User"] as AutoCompany_1_1.Models.User).getRole() == "dispatcher")
+{
+	<p>
+		@Html.ActionLink("Create New", "Create")
+	</p>
+}
+
+
+<body>
 	@using (Html.BeginForm("Index", "SetupDriver", FormMethod.Post, new { @style = "display:-webkit-inline-box" }))
 	{
 		@*@Html.EditorFor(model => model.FirstOrDefault().dateStart, new { htmlAttributes = new { @class = "form-control", @type = "date",@id="date" } } )*@
-		<input type="date" class="form-control" name="date" id="date">
+		<input type="date" class="form-control" name="date" id="date" value="@ViewData["date"]">
 		<input type="submit" value="accept" class="form-control">
 	}
 
@@ -58,64 +54,54 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.dateStart)
 				</td>
-
 				<td>
 					@Html.DisplayFor(modelItem => item.dateEnd)
 				</td>
-
 				<td>
 					@Html.DisplayFor(modelItem => item.bus.name)
 				</td>
-
 				<td>
-					@if (Session["User"] != null)
+					@if (Session["User"] != null && ((Session["User"] as AutoCompany_1_1.Models.User).getRole() == "dispatcher" || (Session["User"] as AutoCompany_1_1.Models.User).getRole() == "admin"))
 					{
-						if ((Session["User"] as AutoCompany_1_1.Models.User).getRole() == "dispatcher" || (Session["User"] as AutoCompany_1_1.Models.User).getRole() == "admin")
-						{
-							@Html.ActionLink(item.firstDriver.name, "Index", "WorkerInfo", new { id = item.firstDriver.idDriver }, "")
-						}
+						@Html.ActionLink(item.firstDriver.name, "Index", "WorkerInfo", new { id = item.firstDriver.idDriver }, "")
 					}
 					else
 					{@Html.DisplayFor(modelItem => item.firstDriver.name)}
 				</td>
-
 				<td>
-					@if (Session["User"] != null)
+					@if ((Session["User"] != null && ((Session["User"] as AutoCompany_1_1.Models.User).getRole() == "dispatcher" ||
+						(Session["User"] as AutoCompany_1_1.Models.User).getRole() == "admin") &&
+						item.secondDriver != null))
 					{
-						if (((Session["User"] as AutoCompany_1_1.Models.User).getRole() == "dispatcher" ||
-							(Session["User"] as AutoCompany_1_1.Models.User).getRole() == "admin") &&
-							item.secondDriver != null)
-						{
-							@Html.ActionLink(item.secondDriver.name, "Index", "WorkerInfo", new { id = item.secondDriver.idDriver }, "")
-						}
+						@Html.ActionLink(item.secondDriver.name, "Index", "WorkerInfo", new { id = item.secondDriver.idDriver }, "")
 					}
 					else
-					{@Html.DisplayFor(modelItem => item.secondDriver.name)}
-				</td>
-
-				<td>
-					@if (Session["User"] != null)
 					{
-						if (((Session["User"] as AutoCompany_1_1.Models.User).getRole() == "dispatcher" ||
-							(Session["User"] as AutoCompany_1_1.Models.User).getRole() == "admin") &&
-							item.conductor != null)
-						{
-							@Html.ActionLink(item.conductor.name, "Index", "WorkerInfo", new { id = item.conductor.idDriver }, "")
-						}
+						@Html.DisplayFor(modelItem => item.secondDriver.name)
+					}
+				</td>
+				<td>
+					@if ((Session["User"] != null && ((Session["User"] as AutoCompany_1_1.Models.User).getRole() == "dispatcher" ||
+						(Session["User"] as AutoCompany_1_1.Models.User).getRole() == "admin") &&
+						item.conductor != null))
+					{
+						@Html.ActionLink(item.conductor.name, "Index", "WorkerInfo", new { id = item.conductor.idDriver }, "")
 					}
 					else
-					{@Html.DisplayFor(modelItem => item.conductor.name)}
+					{
+						@Html.DisplayFor(modelItem => item.conductor.name)
+					}
 				</td>
-
 				<td>
 					@Html.ActionLink(item.route.name, "Details", "Route", new { id = item.route.idRoute }, "")
 				</td>
-
-				<td>
-					@Html.ActionLink("Edit", "Edit", new { id_bs = item.idSetupped_route })
-					@Html.ActionLink("Details", "Details", new { id = item.idSetupped_route }) |
-					@Html.ActionLink("Delete", "Delete", new { id = item.idSetupped_route })
-				</td>
+				@if (Session["User"] != null && (Session["User"] as AutoCompany_1_1.Models.User).getRole() == "dispatcher")
+				{
+					<td>
+						@Html.ActionLink("Edit", "Edit", new { id_bs = item.idSetupped_route })
+						@Html.ActionLink("Delete", "Delete", new { id = item.idSetupped_route })
+					</td>
+				}
 			</tr>
 		}
 

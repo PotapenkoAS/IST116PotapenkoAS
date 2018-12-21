@@ -32,7 +32,7 @@ namespace AutoCompany_1_1.Models
         {
             Regex driverReg = new Regex(@"^\d");
             Regex dispatcherReg = new Regex(@"^[a-z]", RegexOptions.IgnoreCase);
-            Regex adminReg = new Regex(@"^[\.\$\^\{\[\(\|\)\*\+\?\\]");
+            Regex adminReg = new Regex(@"^[\.\$\^\{\[\(\|\)\]\}\*\+\?\\]");
             if (workerCode == null)
             {
                 workerCode = "";
@@ -179,7 +179,6 @@ namespace AutoCompany_1_1.Models
 
         public static string GenerateCode(string role)
         {
-            Regex adminReg = new Regex(@"^[\.\$\^\{\[\(\|\)\*\+\?\\]");//  .$^{](|)]}?\     (|) 33-125 i
             string code;
             string syms = @".$^{](|)]}?\";
             Random rnd = new Random();

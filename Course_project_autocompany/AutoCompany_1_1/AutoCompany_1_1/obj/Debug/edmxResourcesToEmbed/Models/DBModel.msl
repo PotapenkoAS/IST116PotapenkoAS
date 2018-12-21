@@ -28,43 +28,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="car">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.car">
-        <MappingFragment StoreEntitySet="car">
-          <ScalarProperty Name="idCar" ColumnName="idCar" />
-          <ScalarProperty Name="idCarType" ColumnName="idCarType" />
-          <ScalarProperty Name="desctiption" ColumnName="desctiption" />
-          <ScalarProperty Name="regNumber" ColumnName="regNumber" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="car_list">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.car_list">
-        <MappingFragment StoreEntitySet="car_list">
-          <ScalarProperty Name="idCar_list" ColumnName="idCar_list" />
-          <ScalarProperty Name="idCar" ColumnName="idCar" />
-          <ScalarProperty Name="idOrder_list" ColumnName="idOrder_list" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="car_type">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.car_type">
-        <MappingFragment StoreEntitySet="car_type">
-          <ScalarProperty Name="idCarType" ColumnName="idCarType" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="idQualification" ColumnName="idQualification" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="car_type_qual">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.car_type_qual">
-        <MappingFragment StoreEntitySet="car_type_qual">
-          <ScalarProperty Name="idCar_type_qual" ColumnName="idCar_type_qual" />
-          <ScalarProperty Name="idCarType" ColumnName="idCarType" />
-          <ScalarProperty Name="idQualification" ColumnName="idQualification" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="customer">
       <EntityTypeMapping TypeName="AutoCompanyDBModel.customer">
         <MappingFragment StoreEntitySet="customer">
@@ -132,35 +95,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="driver_list">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.driver_list">
-        <MappingFragment StoreEntitySet="driver_list">
-          <ScalarProperty Name="idDriver_list" ColumnName="idDriver_list" />
-          <ScalarProperty Name="idDriver" ColumnName="idDriver" />
-          <ScalarProperty Name="idOrder_list" ColumnName="idOrder_list" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="order">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.order">
-        <MappingFragment StoreEntitySet="order">
-          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="cost" ColumnName="cost" />
-          <ScalarProperty Name="adress" ColumnName="adress" />
-          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="order_list">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.order_list">
-        <MappingFragment StoreEntitySet="order_list">
-          <ScalarProperty Name="idOrder_item" ColumnName="idOrder_item" />
-          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
-          <ScalarProperty Name="idService" ColumnName="idService" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="qualification">
       <EntityTypeMapping TypeName="AutoCompanyDBModel.qualification">
         <MappingFragment StoreEntitySet="qualification">
@@ -181,6 +115,7 @@
     <EntitySetMapping Name="seat">
       <EntityTypeMapping TypeName="AutoCompanyDBModel.seat">
         <MappingFragment StoreEntitySet="seat">
+          <ScalarProperty Name="isBusy" ColumnName="isBusy" />
           <ScalarProperty Name="idSeat" ColumnName="idSeat" />
           <ScalarProperty Name="idBus" ColumnName="idBus" />
           <ScalarProperty Name="row" ColumnName="row" />
@@ -189,32 +124,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="service">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.service">
-        <MappingFragment StoreEntitySet="service">
-          <ScalarProperty Name="idService" ColumnName="idService" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="cost" ColumnName="cost" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="service_car_type">
-      <EntityTypeMapping TypeName="AutoCompanyDBModel.service_car_type">
-        <MappingFragment StoreEntitySet="service_car_type">
-          <ScalarProperty Name="idService_car_type" ColumnName="idService_car_type" />
-          <ScalarProperty Name="idService" ColumnName="idService" />
-          <ScalarProperty Name="idCarType" ColumnName="idCarType" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ticket">
       <EntityTypeMapping TypeName="AutoCompanyDBModel.ticket">
         <MappingFragment StoreEntitySet="ticket">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="idSetupped_route" ColumnName="idSetupped_route" />
           <ScalarProperty Name="idTticket" ColumnName="idTticket" />
           <ScalarProperty Name="idBus" ColumnName="idBus" />
           <ScalarProperty Name="idSeat" ColumnName="idSeat" />
           <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
-          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
           <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="cost" ColumnName="cost" />
           <ScalarProperty Name="startDest" ColumnName="startDest" />
@@ -225,6 +143,7 @@
     <EntitySetMapping Name="setupped_route">
       <EntityTypeMapping TypeName="AutoCompanyDBModel.setupped_route">
         <MappingFragment StoreEntitySet="setupped_route">
+          <ScalarProperty Name="cost" ColumnName="cost" />
           <ScalarProperty Name="idConductor" ColumnName="idConductor" />
           <ScalarProperty Name="idSecondDriver" ColumnName="idSecondDriver" />
           <ScalarProperty Name="idFirstDriver" ColumnName="idFirstDriver" />

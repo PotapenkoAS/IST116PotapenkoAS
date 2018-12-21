@@ -1,0 +1,64 @@
+﻿@model AutoCompany_1_1.Models.ticket
+
+@{
+	ViewBag.Title = "TicketSecondStep";
+}
+
+<h2>TicketSecondStep</h2>
+<script>
+	function setCost() {
+		var sr = document.getElementById("idSR");
+		var selopt = sr.options[sr.selectedIndex];
+		var arr = selopt.text.split(',');
+		document.getElementById("cost").value = arr[arr.length - 1].toString();
+	}
+</script>
+<body onload="setCost()">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+			<h4>ticket</h4>
+			<hr />
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.idSetupped_route, "idSetupped_route", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownList("idSetRoute", null, htmlAttributes: new { @class = "form-control", @id = "idSR", @onchange = "setCost()" })
+					@Html.ValidationMessageFor(model => model.idSetupped_route, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.idSeat, "idSeat", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownList("idSeat", null, htmlAttributes: new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.idSeat, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.cost, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control", @id = "cost", @readonly = "true", @type = "text" } })
+					@Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+
+
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Create" class="btn btn-default" />
+				</div>
+			</div>
+		</div>
+	}
+</body>
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>

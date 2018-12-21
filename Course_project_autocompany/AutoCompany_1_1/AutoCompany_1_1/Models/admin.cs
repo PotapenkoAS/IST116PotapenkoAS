@@ -15,7 +15,6 @@ namespace AutoCompany_1_1.Models
     public partial class admin:User
     {
         public int idAdmin { get; set; }
-      
         public Nullable<int> experience { get; set; }
         public Nullable<int> salary { get; set; }
 
@@ -31,5 +30,6 @@ namespace AutoCompany_1_1.Models
             a.workerCode = v.workerCode;
             return a;
         }
+
     }
 }

@@ -14,11 +14,18 @@ namespace AutoCompany_1_1.Models
     
     public partial class setupped_route
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public setupped_route()
+        {
+            this.ticket = new HashSet<ticket>();
+        }
+    
         public int idSetupped_route { get; set; }
         public int idRoute { get; set; }
         public int idBus { get; set; }
         public System.DateTime dateStart { get; set; }
         public System.DateTime dateEnd { get; set; }
+        public Nullable<int> cost { get; set; }
         public int idFirstDriver { get; set; }
         public Nullable<int> idSecondDriver { get; set; }
         public Nullable<int> idConductor { get; set; }
@@ -28,5 +35,7 @@ namespace AutoCompany_1_1.Models
         public virtual driver secondDriver { get; set; }
         public virtual driver conductor { get; set; }
         public virtual route route { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ticket> ticket { get; set; }
     }
 }

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<AutoCompany_1_1.Models.ticket>
+
+@{
+
+	ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+	@Html.ActionLink("Create New", "NewTicket")
+</p>
+<table class="table">
+	<tr>
+		<th>
+			Date
+		</th>
+		<th>
+			Status
+		</th>
+		<th>
+			Name
+		</th>
+		<th>
+			From
+		</th>
+		<th>
+			To
+		</th>
+		<th>
+			Seat
+		</th>
+		<th>
+			Route
+		</th>
+		<th>
+			Cost
+		</th>
+		<th></th>
+	</tr>
+	@{int i = 0; }
+	@foreach (var item in Model)
+	{
+		string name = (ViewData["routeName"] as List<SelectListItem>).ElementAt(i).Text;
+		string id = (ViewData["routeName"] as List<SelectListItem>).ElementAt(i).Value;
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.setupped_route.dateStart)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.status)
+			</td>
+			<td>
+				<p>@item.customer.surname @item.customer.name @item.customer.patronymic</p>
+			</td>
+			<td>
+				<p>@Html.ActionLink(item.destination.town + "-" + item.destination.name, "Details", "Route", new { id = id }, null)</p>
+			</td>
+			<td>
+				<p>@Html.ActionLink(item.destination1.town + "-" + item.destination1.name, "Details", "Route", new { id = id }, null)</p>
+			</td>
+			<td>
+				<p>@item.seat.number - @item.seat.column:@item.seat.row</p>
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => name)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.cost)
+			</td>
+			<td>
+				@if (Session["User"] != null && (Session["User"] as AutoCompany_1_1.Models.User).getRole() == "dispatcher")
+				{
+					@Html.ActionLink("Edit status", "Edit", new { id = item.idTticket })
+					@Html.ActionLink("Details", "Details", "SetupDriver", new { id = item.idSetupped_route }, "")
+				}
+			</td>
+		</tr>
+		i++;
+	}
+
+</table>

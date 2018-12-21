@@ -33,7 +33,13 @@
 				@Html.ValidationMessageFor(model => model.idConductor, "", new { @class = "text-danger" })
 			</div>
 		</div>
-
+		@if (ViewData["Errors"] != null)
+		{
+			foreach (string el in ViewData["Errors"] as List<string>)
+			{
+				<p style="color:red">@el</p>
+			}
+		}
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<input type="submit" value="Create" class="btn btn-default" />

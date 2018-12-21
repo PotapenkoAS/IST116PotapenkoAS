@@ -21,6 +21,5 @@ namespace AutoCompany_1_1.Models
         public Nullable<System.TimeSpan> timeOut { get; set; }
     
         public virtual destination destination { get; set; }
-        public virtual route route { get; set; }
     }
 }

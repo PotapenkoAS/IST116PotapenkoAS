@@ -15,10 +15,8 @@ namespace AutoCompany_1_1.Models
     public partial class dispatcher:User
     {
         public int idDispatcher { get; set; }
-       
         public Nullable<int> experience { get; set; }
         public Nullable<int> salary { get; set; }
-
         public static dispatcher Convert(User v)
         {
             var a = new dispatcher();
@@ -31,5 +29,7 @@ namespace AutoCompany_1_1.Models
             a.workerCode = v.workerCode;
             return a;
         }
+
+
     }
 }
