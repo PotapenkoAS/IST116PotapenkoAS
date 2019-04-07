@@ -1,2 +1,4 @@
 *.iml
 /TestResults
+/obj
+/bin
