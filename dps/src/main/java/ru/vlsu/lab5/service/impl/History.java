@@ -1,6 +1,8 @@
 package ru.vlsu.lab5.service.impl;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 import ru.vlsu.lab5.bean.Worker;
 import ru.vlsu.lab5.service.interfaces.IHistory;
 
@@ -11,8 +13,9 @@ import java.util.ArrayList;
 
 @Stateful
 @Component
+@Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class History implements IHistory {
-    private static ArrayList<Worker> history;
+    private ArrayList<Worker> history;
 
     @Override
     public ArrayList<Worker> getHistory() {

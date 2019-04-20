@@ -1,6 +1,9 @@
 package ru.vlsu.lab5.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 import ru.vlsu.lab5.bean.Worker;
 import ru.vlsu.lab5.service.interfaces.IConn;
 import ru.vlsu.lab5.service.interfaces.IHistory;
@@ -11,14 +14,25 @@ import java.sql.*;
 import java.util.ArrayList;
 
 @Service
+@Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class MainService {
 
     @EJB
     private IConn iConn;
     @EJB
-    private IHistory iHistory;
-    @EJB
     private ISingle iSingle;
+    @EJB
+    private IHistory iHistory;
+
+
+
+    public ArrayList getHistory(){
+        return iHistory.getHistory();
+    }
+
+    public void addHistory(Worker worker){
+        iHistory.addHistory(worker);
+    }
 
     public ArrayList<Worker> getAllWorkers() {
         ArrayList<Worker> result = new ArrayList<>();
@@ -66,7 +80,6 @@ public class MainService {
             statement.setInt(i, worker.getQualID());
             flag = (statement.executeUpdate() > 0);
             iConn.closeConn(conn);
-            iHistory.addHistory(worker);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,15 +97,11 @@ public class MainService {
             statement.setInt(i, worker.getWorkerID());
             statement.executeUpdate();
             iConn.closeConn(conn);
-            iHistory.addHistory(worker);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<Worker> getHistory() {
-        return iHistory.getHistory();
-    }
 
     public String getMessage() {
         return iSingle.getMessage();

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 
 <sql:query var="listWorkers" dataSource="jdbc/MySQLDataSource">
     select workerID, Surname, Name from Worker;
@@ -24,8 +24,8 @@
         </tr>
         <c:forEach var="worker" items="${listWorkers.rows}">
             <tr>
-                <td><c:out value="${worker.username}" /></td>
-                <td><c:out value="${worker.email}" /></td>
+                <td><c:out value="${worker.username}"/></td>
+                <td><c:out value="${worker.email}"/></td>
             </tr>
         </c:forEach>
     </table>

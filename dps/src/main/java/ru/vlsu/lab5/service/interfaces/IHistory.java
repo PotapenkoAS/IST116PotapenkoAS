@@ -4,6 +4,7 @@ import ru.vlsu.lab5.bean.Worker;
 
 import javax.ejb.Remote;
 import java.util.ArrayList;
+
 @Remote
 public interface IHistory {
     ArrayList<Worker> getHistory();

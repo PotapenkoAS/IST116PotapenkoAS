@@ -31,6 +31,7 @@
             }
         }
     </script>
+
     <div align="right" id="historyTableDiv">
         <table border="1" cellpadding="3">
             <caption><h2>History</h2></caption>
